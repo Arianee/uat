@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple html file to test</title>
+</head>
+<script>
+    function addClass() {
+        var element = document.getElementById("button1");
+        element.classList.add("hadInteraction");
+    }
+
+    function removeClass() {
+        var element = document.getElementById("removeClassId");
+        element.classList.remove("removed-loader");
+    }
+
+    setTimeout(() => {
+        removeClass();
+    }, 3000)
+</script>
+<body>
+
+<div id="idSelector"></div>
+<div class="classSelector"></div>
+<div data-e2e="dataAttributeSelector"></div>
+
+<div data-e2e="content">A simple content.</div>
+
+<div id="button1" onclick="addClass()">I am a button</div>
+Cette page est une
+page toute simple
+
+<input id="inputId">
+
+<div id="removeClassId" class="removed-loader">I am a loader</div>
+</body>
+</html>

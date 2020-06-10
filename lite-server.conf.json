@@ -1,0 +1,6 @@
+{
+  "port":4200,
+  "files": ["./www/**/*.{html,htm,css,js}"],
+  "server": { "baseDir": "./www" },
+  "open":false
+}
