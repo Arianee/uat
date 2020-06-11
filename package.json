@@ -1,29 +1,32 @@
 {
   "name": "@arianee/uat",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "description": "",
   "main": "dist",
   "scripts": {
+    "prepublish": "npm test",
+    "postpublish": "npm version minor && git push",
     "build": "tsc",
+    "build:w": "tsc --watch",
     "test": "npm run test:unit && node test.js",
     "server": "node_modules/lite-server/bin/lite-server -c lite-server.conf.json",
     "test:unit": "jest",
-    "test:e2e": "./node_modules/.bin/cucumber-js features/**.feature --require-module ts-node/register --require 'src/steps/**/*.step.ts' --format node_modules/cucumber-pretty",
+    "postinstall": "node ./script.js",
+    "test:e2e": "myEnvValue='myenvValue' ./node_modules/.bin/cucumber-js features/**.feature --require-module ts-node/register --require 'src/steps/**/*.step.ts' --format node_modules/cucumber-pretty --tags @dev",
     "e2e:dev": "headless=false myEnvValue='myenvValue' ./node_modules/.bin/cucumber-js features/**.feature --require-module ts-node/register --require 'src/steps/**/*.step.ts' --format node_modules/cucumber-pretty --tags @dev"
   },
   "files": [
-    "dist",
+    "common_steps",
     "features"
   ],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cucumber": "^6.0.5",
-    "cucumber-pretty": "^6.0.0",
+    "cucumber": "^5.1.0",
+    "gently-copy": "^3.2.0",
     "puppeteer": "^2.0.0"
   },
   "devDependencies": {
-    "@types/node": "^13.1.8",
     "@babel/cli": "^7.7.7",
     "@babel/core": "^7.7.7",
     "@babel/node": "^7.7.7",
@@ -31,8 +34,10 @@
     "@babel/preset-env": "^7.7.7",
     "@types/cucumber": "^6.0.0",
     "@types/jest": "^24.9.0",
+    "@types/node": "^13.1.8",
     "babel-jest": "^25.1.0",
     "babel-watch": "^7.0.0",
+    "cucumber-pretty": "^6.0.0",
     "jest": "^25.1.0",
     "lite-server": "^2.5.4",
     "ts-jest": "^25.0.0",

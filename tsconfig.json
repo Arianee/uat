@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "experimentalDecorators": true,
-    "outDir": "./dist",
+    "outDir": "./common_steps",
     "noImplicitAny": false,
     "sourceMap": true,
     "declaration": true,

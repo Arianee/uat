@@ -41,3 +41,27 @@ Feature: Dev can test a lot of thing
     Given user set input '#inputId' with 'mycustom-##REGULARSTRING##'
 
 ```
+
+
+# How to get started:
+
+```bash
+npm install @arianee/uat -S
+```
+
+Because cucumberjs has a little issue with files in node_modules, ``common_steps`` is copy pasted to your cwd.
+So please add to your ``.gitignore``
+```text
+dist/
+browser/
+node/
+
+common_steps/
+```
+
+To execute simply require it with or without your steps
+
+```bash
+"./node_modules/.bin/cucumber-js features/implemented/**/*.feature --require 'dist/steps/*.step.js' --require 'common_steps/*.step.js'",
+
+```

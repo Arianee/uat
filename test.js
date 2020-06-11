@@ -11,6 +11,6 @@ const {execSync, spawn} = require('child_process');
     console.log("server launch");
 
 
-    execSync('npm run e2e',    {stdio: 'inherit'});
+    execSync('npm run test:e2e',    {stdio: 'inherit'});
     serverProcess.kill();
 })();
