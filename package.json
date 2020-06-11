@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist",
   "scripts": {
-    "prepublish": "npm test",
+    "prepublish": "npm run build && npm test",
     "postpublish": "npm version minor && git push",
     "build": "tsc",
     "build:w": "tsc --watch",
