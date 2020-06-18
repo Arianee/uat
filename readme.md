@@ -69,3 +69,43 @@ To execute simply require it with or without your steps
 "./node_modules/.bin/cucumber-js features/implemented/**/*.feature --require 'dist/steps/*.step.js' --require 'common_steps/*.step.js'",
 
 ```
+
+# Configuration variables
+```process.env.DEBUG``` : setting up debug mode. It will wait for user input to continue to next step.
+```process.env.headless``` : setting up headless mode of browser. default ```true```
+
+# How to debug
+
+There is 2 ways to debug.
+You can set ```process.env.DEBUG``` to ```true``` and it will wait for your input to pass to next step.
+
+```bash
+"DEBUG=true ./node_modules/.bin/cucumber-js features/**.feature --require-module ts-node/register --require 'src/steps/**/*.step.ts' -f node_modules/cucumber-pretty"
+```
+It will output in terminal:
+```
+Feature: Dev can test a lot of thing
+
+  @dev
+  Scenario: Dev can build its own variable with string
+Press any key to continue to next step
+    Given user navigates to 'http://localhost:4200'
+Press any key to continue to next step
+    Given store value 'a string' as '##REGULARSTRING##'
+Press any key to continue to next step
+
+```
+
+Or you can use the ```debug``` step
+
+```
+ Scenario: Dev can pause
+     Given store value 'a string' as '##REGULARSTRING##'
+     Given debug <== use this to pause
+```
+
+Also you can set ```process.env.headless``` to ```true```
+
+```bash
+"DEBUG=true headless=true ./node_modules/.bin/cucumber-js features/**.feature --require-module ts-node/register --require 'src/steps/**/*.step.ts' -f node_modules/cucumber-pretty"
+```

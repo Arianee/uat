@@ -1,7 +1,24 @@
-import { After, AfterAll, Before, BeforeAll } from 'cucumber';
-import { Browser, Page } from 'puppeteer';
+import {After, Before} from 'cucumber';
+import {Browser, Page} from 'puppeteer';
 import {utils} from "./helpers/utils";
+import {setDefinitionFunctionWrapper, setDefaultTimeout} from "cucumber";
+import {askQuestionBeforePassingToNextStep} from "./debug.step";
 
+if (process.env.DEBUG) {
+    setDefaultTimeout(3600 * 1000);
+}
+setDefinitionFunctionWrapper(function (fn) {
+    return async function (...args) {
+        try {
+            if (process.env.DEBUG) {
+                await askQuestionBeforePassingToNextStep();
+            }
+            return await fn.apply(this, args);
+        } catch (ex) {
+            throw ex;
+        }
+    };
+});
 const puppeteer = require('puppeteer');
 
 declare module 'cucumber' {
@@ -14,13 +31,16 @@ declare module 'cucumber' {
 }
 
 Before(async function () {
+
+    const isHeadless=process.env.headless !== undefined ? process.env.headless=='true' : true;
+
     this.browser = await puppeteer.launch({
         args: [
             '--disable-web-security',
             '--allow-no-sandbox-job'
         ],
         slowMo: 150,
-        headless: process.env.headless || true,
+        headless: isHeadless,
         defaultViewport: { width: 920, height: 640 }
     });
 
