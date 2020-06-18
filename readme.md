@@ -23,6 +23,8 @@ Feature: Dev can test a lot of thing
 
   Scenario: Dev can interact with form
     Given user set input '#inputId' with 'value'
+    Given '#inputId' input value should contain 'value'
+    Given '#inputId' input value should NOT contain 'notTheVal'
 
   Scenario: Dev can check after a period of time
     Then user does not see '.removed-loader' after 5 seconds
