@@ -36,3 +36,4 @@ Feature: Dev can test a lot of thing
     Given store value 'a string' as '##REGULARSTRING##'
     Given user set input '#inputId' with '##REGULARSTRING##'
     Given user set input '#inputId' with 'mycustom-##REGULARSTRING##'
+
