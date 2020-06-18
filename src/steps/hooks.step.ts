@@ -4,13 +4,13 @@ import {utils} from "./helpers/utils";
 import {setDefinitionFunctionWrapper, setDefaultTimeout} from "cucumber";
 import {askQuestionBeforePassingToNextStep} from "./debug.step";
 
-if (process.env.DEBUG) {
+if (process.env.DEBUG=='true') {
     setDefaultTimeout(3600 * 1000);
 }
 setDefinitionFunctionWrapper(function (fn) {
     return async function (...args) {
         try {
-            if (process.env.DEBUG) {
+            if (process.env.DEBUG=='true') {
                 await askQuestionBeforePassingToNextStep();
             }
             return await fn.apply(this, args);

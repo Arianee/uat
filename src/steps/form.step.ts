@@ -38,7 +38,6 @@ Then('{string} input value should contain {string}', async function (selectorNam
         return element.value;
     }, concatenatedSelector);
 
-    console.log(content)
     assert(content.trim().toLowerCase().includes(expectedValue.trim().toLowerCase()));
 });
 
@@ -49,6 +48,5 @@ Then('{string} input value should NOT contain {string}', async function (selecto
         return element.value;
     }, concatenatedSelector);
 
-    console.log(content)
     assert(!content.trim().toLowerCase().includes(expectedValue.trim().toLowerCase()));
 });
