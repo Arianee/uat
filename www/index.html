@@ -4,6 +4,11 @@
     <title>Simple html file to test</title>
 </head>
 <script>
+    setTimeout(() => {
+        var node = document.createElement("LI");
+        node.id='dynamicContent'
+        document.getElementById("dynamicContentContainer").appendChild(node)
+    }, 3000);
     function addClass() {
         var element = document.getElementById("button1");
         element.classList.add("hadInteraction");
@@ -25,7 +30,7 @@
 <div data-e2e="dataAttributeSelector"></div>
 
 <div data-e2e="content">A simple content.</div>
-
+<div id="dynamicContentContainer"></div>
 <div id="button1" onclick="addClass()">I am a button</div>
 Cette page est une
 page toute simple

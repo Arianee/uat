@@ -4,11 +4,14 @@ Feature: Dev can test a lot of thing
   Background:
     Given user navigates to 'http://localhost:4200'
 
+    @dev
   Scenario: Dev can use different selector
     Then user sees '.classSelector'
     Then user sees '#idSelector'
     Then user sees 'dataAttributeSelector'
     Then user sees 'dataAttributeSelector'
+    Then user sees '#dynamicContent'
+    Then user sees '<body'
 
   Scenario: Dev can interact different selector
     When user clicks on '#button1'

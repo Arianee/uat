@@ -15,13 +15,19 @@ const isClassOrId=(selector:string)=>{
       || selector.includes('~')
       || selector.includes('*')
       || selector.includes(':')
-      || selector.includes('>');
+      || selector.includes('>')
 }
+
+const isTag = (selector: string) => {
+  return selector.includes('<')
+};
 
 const selectorFactory=(selector)=>{
   if(isClassOrId(selector)){
     return selector
-  }else{
+  } else if (isTag(selector)) {
+    return selector.replace('<', '')
+  } else {
     return dataAttributeSelectorFactory(selector);
   }
 }

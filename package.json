@@ -12,7 +12,7 @@
     "server": "node_modules/lite-server/bin/lite-server -c lite-server.conf.json",
     "test:unit": "./node_modules/.bin/jest",
     "postinstall": "node ./script.js",
-    "test:e2e": "myEnvValue=myenvValue ./node_modules/.bin/cucumber-js ./features/**.feature --require-module ts-node/register --require 'src/steps/**/*.step.ts'",
+    "test:e2e": "myEnvValue=myenvValue ./node_modules/.bin/cucumber-js ./features/**.feature --require-module ts-node/register --require 'src/steps/**/*.step.ts' -f node_modules/cucumber-pretty",
     "e2e:dev": "DEBUG=false headless=false myEnvValue='myenvValue' ./node_modules/.bin/cucumber-js features/**.feature --require-module ts-node/register --require 'src/steps/**/*.step.ts' -f node_modules/cucumber-pretty --tags @dev"
   },
   "files": [
