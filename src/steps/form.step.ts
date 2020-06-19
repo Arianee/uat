@@ -50,3 +50,22 @@ Then('{string} input value should NOT contain {string}', async function (selecto
 
     assert(!content.trim().toLowerCase().includes(expectedValue.trim().toLowerCase()));
 });
+
+Then('user fill up form', async function (tableForm) {
+
+    const properties = tableForm.raw();
+
+
+    const prepareProperties = properties.map(([selectorName, value]) => {
+        const concatenatedSelector = this.utils.selectorFactory(selectorName);
+        return [concatenatedSelector, value]
+    });
+
+    const content = await this.page.evaluate((selectors) => {
+        selectors.forEach(([selector, value]) => {
+            const element = document.querySelector(selector);
+            element.value=value
+        })
+    }, prepareProperties);
+
+});

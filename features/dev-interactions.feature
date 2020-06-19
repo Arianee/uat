@@ -39,3 +39,10 @@ Feature: Dev can test a lot of thing
     Given user set input '#inputId' with '##REGULARSTRING##'
     Given user set input '#inputId' with 'mycustom-##REGULARSTRING##'
 
+  Scenario: Dev can fill up a form quickly
+    Given user fill up form
+      | form inputText   | it is a string |
+      | form selectInput | cat            |
+      | form inputNumber | 22             |
+    Given 'form inputText' input value should contain 'it is a string'
+    Given 'form inputNumber' input value should contain '22'
