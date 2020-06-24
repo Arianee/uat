@@ -1,13 +1,13 @@
 import {Given} from "cucumber";
 import assert = require("assert");
 
-Given('user sees {string}', async function (selectorName) {
-    await this.page.waitForSelector(this.utils.selectorFactory(selectorName), {
+Given('user sees {selector}', async function (selectorName) {
+    await this.page.waitForSelector(selectorName, {
         visible: true
     });
 });
 
-Given('user does not see {string} after {int} seconds', async function (selectorName,timeout) {
+Given('user does not see {selector} after {int} seconds', async function (selectorName,timeout) {
     try {
         await this.page.waitForSelector(this.utils.selectorFactory(selectorName), {
             visible: true,
@@ -22,7 +22,7 @@ Given('user does not see {string} after {int} seconds', async function (selector
     });
 });
 
-Given('{string} content is {string}', async function (selector, expectedValue) {
+Given('{selector} content is {string}', async function (selector, expectedValue) {
     const concatenatedSelector = this.utils.selectorFactory(selector);
     const content = await this.page.evaluate((aselector) => {
         const element = document.querySelector(aselector);

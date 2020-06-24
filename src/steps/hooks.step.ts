@@ -1,4 +1,4 @@
-import {After, Before} from 'cucumber';
+import {After, Before, defineParameterType} from 'cucumber';
 import {Browser, Page} from 'puppeteer';
 import {utils} from "./helpers/utils";
 import {setDefinitionFunctionWrapper, setDefaultTimeout} from "cucumber";
@@ -29,6 +29,26 @@ declare module 'cucumber' {
         utils:any,
     }
 }
+
+
+defineParameterType({
+    regexp: /'(.*?)'/,
+    transformer(selectorName) {
+        return    this.utils.selectorFactory(selectorName);
+    },
+    name: 'selector',
+    useForSnippets: true
+});
+
+defineParameterType({
+    regexp: /'(.*?)'/,
+    transformer(string) {
+        return this.utils.interpolate(string).toString();
+    },
+    name: 'interpolateValue',
+    useForSnippets: true
+});
+
 
 Before(async function () {
 

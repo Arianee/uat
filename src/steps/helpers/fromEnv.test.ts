@@ -34,6 +34,13 @@ describe('from store',()=>{
         const expectedValue='jsonbuild-1877';
         expect(interpolateFromStore(value,store)).toBe(expectedValue);
     })
+
+    test('it should not replace value by store value if not exist 000',()=>{
+        const store={ '##TOKENID##': 'content to store' }
+        const value="##TOKENID##";
+        const expectedValue='content to store';
+        expect(interpolateFromStore(value,store)).toBe(expectedValue);
+    })
 })
 
 

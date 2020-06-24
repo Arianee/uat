@@ -1,10 +1,8 @@
-
 Feature: Dev can test a lot of thing
 
   Background:
     Given user navigates to 'http://localhost:4200'
 
-    @dev
   Scenario: Dev can use different selector
     Then user sees '.classSelector'
     Then user sees '#idSelector'
@@ -49,3 +47,24 @@ Feature: Dev can test a lot of thing
       | form inputNumber | 22             |
     Given 'form inputText' input value should contain 'it is a string'
     Given 'form inputNumber' input value should contain '22'
+
+@dev
+  Scenario: Dev can fill up a form quickly
+    Given store value 'a string' as '##REGULARSTRING##'
+    Given user fill up form
+      | form inputText   | ##REGULARSTRING##       |
+      | form selectInput | cat            |
+      | form inputNumber | 22             |
+    Given 'form inputText' input value should contain 'a string'
+    Given 'form inputNumber' input value should contain '22'
+
+  Scenario: Dev can retrieve and store content of div
+    Given store content value from selector 'contentToStore' as '##LINK##'
+    Given user set input 'form inputText' with '##LINK##'
+    Given 'form inputText' input value should contain 'Content to retrieve'
+
+  Scenario: Dev can retrieve and store content of div
+    Given store content value from selector 'contentToStore' as '##LINK##'
+    Given user fill up form
+      | form inputText   | ##LINK## |
+    Given 'form inputText' input value should contain 'Content to retrieve'
