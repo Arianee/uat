@@ -6,14 +6,6 @@ Given('user enter {interpolateValue}', async function (value) {
     await this.page.keyboard.type(value);
 });
 
-Given('store value {interpolateValue} as {string}', async function (value,key) {
-    if(value==='randomNumber'){
-        this.store[key]=getRandomInt();
-    }else{
-        this.store[key]=value;
-    }
-});
-
 Then('user set input {selector} with {interpolateValue}', async function (selector, value) {
     const element = await this.page.waitForSelector(selector, {
         visible: true
