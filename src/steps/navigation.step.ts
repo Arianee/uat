@@ -15,6 +15,6 @@ Then('{selector} is displayed', async function (selector) {
 });
 
 Then('user page should land on {interpolateValue}', async function (shouldBeURL) {
-    const url= this.page.url();
-    assert(url ===shouldBeURL)
+    const url= decodeURIComponent(this.page.url());
+    assert(url ===shouldBeURL);
 });
