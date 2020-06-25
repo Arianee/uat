@@ -68,3 +68,7 @@ Feature: Dev can test a lot of thing
     Given user fill up form
       | form inputText   | ##LINK## |
     Given 'form inputText' input value should contain 'Content to retrieve'
+
+    Scenario: User can get current URL
+      Given user navigates to 'https://stackoverflow.com/questions/34701436/create-randomly-generated-url-for-content'
+      Then user page should land on 'https://stackoverflow.com/questions/34701436/create-randomly-generated-url-for-content'
