@@ -12,8 +12,8 @@ export const interpolateFromStore=(value, store)=>{
 
     if(reg.test(value)){
         const storeValue=reg.exec(value)[1];
-        const d=value.replace(storeValue,store[storeValue]);
-        return d;
+        const interpolatedValue=value.replace(storeValue,store[storeValue]);
+        return interpolateFromStore(interpolatedValue,store);
     }else{
         return value;
     }
