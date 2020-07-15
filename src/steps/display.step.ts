@@ -3,7 +3,8 @@ import assert = require("assert");
 
 Given('user sees {selector}', async function (selectorName) {
     await this.page.waitForSelector(selectorName, {
-        visible: true
+        visible: true,
+        timeout: 60000
     });
 });
 
