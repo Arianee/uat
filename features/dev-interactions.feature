@@ -18,6 +18,7 @@ Feature: Dev can test a lot of thing
   Scenario: Dev can check content
     Then 'content' content should contain "simple content"
     Then 'content' content should not contain "complex content"
+    Then 'content' content should not contain "content@johndoe.com"
 
   Scenario: Dev can interact with form
     Given user set input '#inputId' with 'value'
@@ -36,6 +37,13 @@ Feature: Dev can test a lot of thing
     Given store value 'randomNumber' as '{{RANDOMNUMBER}}'
     Given user set input '#inputId' with '{{RANDOMNUMBER}}'
     Given user set input '#inputId' with 'mycustom-{{RANDOMNUMBER}}'
+    Given '#inputId' input value should contain '{{RANDOMNUMBER}}'
+
+  Scenario: Dev can build its own variable with random string
+    Given store value 'randomString' as '{{RandomString}}'
+    Given user set input '#inputId' with '{{RandomString}}'
+    Given '#inputId' input value should contain '{{RandomString}}'
+
 
   Scenario: Dev can build its own variable with string
     Given store value 'a string' as '{{REGULARSTRING}}'

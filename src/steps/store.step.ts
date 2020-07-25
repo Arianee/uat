@@ -9,6 +9,8 @@ Then('store value from process.env.{word} as {string}', async function (envPrope
 Given('store value {interpolateValue} as {string}', async function (value, key) {
     if (value === 'randomNumber') {
         this.store[key] = getRandomInt();
+    } else if (value === 'randomString') {
+        this.store[key]=Math.random().toString(36).slice(-10);
     } else {
         this.store[key] = value;
     }
