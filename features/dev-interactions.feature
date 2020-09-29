@@ -81,3 +81,7 @@ Feature: Dev can test a lot of thing
     Scenario: User can get current URL
       Given user navigates to 'https://stackoverflow.com/questions/34701436/create-randomly-generated-url-for-content'
       Then user page should land on 'https://stackoverflow.com/questions/34701436/create-randomly-generated-url-for-content'
+
+  Scenario: User can take a screenshot and name it
+    Given user navigates to 'http://localhost:4200'
+    Then take screenshot with file name 'gitIgnoreDirectory/screenshot1'
