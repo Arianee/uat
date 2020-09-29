@@ -24,7 +24,9 @@
   "license": "ISC",
   "dependencies": {
     "cucumber": "^5.1.0",
+    "form-data": "^3.0.0",
     "gently-copy": "^3.2.0",
+    "node-fetch": "^2.6.1",
     "puppeteer": "^2.0.0"
   },
   "devDependencies": {

@@ -77,6 +77,19 @@ Feature: Dev can test a lot of thing
       Given user navigates to 'https://stackoverflow.com/questions/34701436/create-randomly-generated-url-for-content'
       Then user page should land on 'https://stackoverflow.com/questions/34701436/create-randomly-generated-url-for-content'
 
+  Scenario: User can take a screenshot and name it
+    Then take screenshot with file name 'gitIgnoreDirectory/screenshot1.jpg'
+
+  Scenario: User can take a screenshot and name it
+    Then take screenshot with file name 'gitIgnoreDirectory/screenshot1.png'
+    Then send screenshot 'gitIgnoreDirectory/screenshot1.png' to api 'https://httpbin.org/post' with custom header
+          """
+         {
+         "Breaking-Bad":"<3",
+         "X-API-Key":"abcdef12345"
+         }
+        """
+
  Scenario: Dev can pause
      Given store value 'a string' as '{{REGULARSTRING}}'
      Given debug <== use this to pause
