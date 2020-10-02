@@ -9,6 +9,7 @@
         node.id='dynamicContent'
         document.getElementById("dynamicContentContainer").appendChild(node)
     }, 3000);
+
     function addClass() {
         var element = document.getElementById("button1");
         element.classList.add("hadInteraction");
@@ -42,6 +43,7 @@ page toute simple
 <form data-e2e="form">
     <input type="text" data-e2e="inputText"/>
     <input type="number" data-e2e="inputNumber"/>
+    <input type="file" data-e2e="inputFile" id="inputField"/>
 
     <select name="pets" data-e2e="selectInput">
         <option value="dog">Dog</option>
@@ -50,5 +52,19 @@ page toute simple
 </form>
 
 <div data-e2e="contentToStore">Content to retrieve</div>
+
 </body>
+<script>
+    var inputElement = document.getElementById("inputField");
+    inputElement.addEventListener("change", handleFiles, false);
+    function handleFiles() {
+        var fileList = this.files; /* Vous pouvez maintenant manipuler la liste de fichiers */
+        console.log(this.files)
+        if(this.files[0].size>0){
+            inputElement.classList.add("file-Uploaded");
+
+
+        }
+    }
+</script>
 </html>

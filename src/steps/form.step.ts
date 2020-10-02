@@ -15,6 +15,15 @@ Then('user set input {selector} with {interpolateValue}', async function (select
     await this.page.keyboard.type(value);
 });
 
+Then('user set input {selector} with file from path {interpolateValue}', async function (selector, filePath) {
+    const element = await this.page.waitForSelector(selector, {
+        visible: true
+    });
+
+    element.uploadFile(filePath);
+
+});
+
 Then('wait for {int} seconds',async function(time){
     await this.page.waitFor(time*1000);
 })

@@ -16,7 +16,6 @@ Then('send screenshot {interpolateValue} to api {interpolateValue}', async funct
 
     fetch(apiURL, {method: 'POST', body: form})
         .then(res => res.json())
-        .then(json => console.log(json));
 });
 
 Then('send screenshot {interpolateValue} to api {interpolateValue} with custom header', async function (screenshotFileName, apiURL, customHeaders) {
@@ -27,5 +26,4 @@ Then('send screenshot {interpolateValue} to api {interpolateValue} with custom h
 
     await fetch(apiURL, {method: 'POST', body: form, headers:new Headers(JSON.parse(customHeaders))})
         .then(res => res.json())
-        .then(json => console.log(json));
 });

@@ -94,3 +94,7 @@ Feature: Dev can test a lot of thing
          "X-API-Key":"abcdef12345"
          }
         """
+
+  Scenario: Dev can upload file
+    Then user set input 'inputFile' with file from path 'package.json'
+    Then user sees '.file-Uploaded'
