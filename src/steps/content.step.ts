@@ -1,7 +1,7 @@
 import {Then} from "cucumber";
 import assert = require("assert");
 
-Then('{selector} content should contain {string}', async function (selectorName, expectedValue) {
+Then('_{selector} content should contain {string}', async function (selectorName, expectedValue) {
     const content = await this.page.evaluate((aselector) => {
         const element = document.querySelector(aselector);
         return element.innerHTML;
@@ -10,7 +10,7 @@ Then('{selector} content should contain {string}', async function (selectorName,
     assert(content.trim().toLowerCase().includes(expectedValue.trim().toLowerCase()));
 });
 
-Then('{selector} content should not contain {string}', async function (selectorName, expectedValue) {
+Then('_{selector} content should not contain {string}', async function (selectorName, expectedValue) {
     const concatenatedSelector = this.utils.selectorFactory(selectorName);
     const content = await this.page.evaluate((aselector) => {
         const element = document.querySelector(aselector);
@@ -21,7 +21,7 @@ Then('{selector} content should not contain {string}', async function (selectorN
 });
 
 
-Then('store content value from selector {selector} as {string}', async function (selector, propertyName) {
+Then('_store content value from selector {selector} as {string}', async function (selector, propertyName) {
 
     const concatenatedSelector = this.utils.selectorFactory(selector);
 

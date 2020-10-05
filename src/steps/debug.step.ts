@@ -16,6 +16,6 @@ export function askQuestionBeforePassingToNextStep() {
     }))
 }
 
-Then('debug',{timeout:3600 * 1000},async function(){
+Then('_debug',{timeout:3600 * 1000},async function(){
     await askQuestionBeforePassingToNextStep();
 })

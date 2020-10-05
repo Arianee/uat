@@ -2,11 +2,11 @@ import {Given, Then} from "cucumber";
 import {getRandomInt, selectorFactory} from "./helpers/selectDataAttribute";
 import assert = require("assert");
 
-Given('user enter {interpolateValue}', async function (value) {
+Given('_user enter {interpolateValue}', async function (value) {
     await this.page.keyboard.type(value);
 });
 
-Then('user set input {selector} with {interpolateValue}', async function (selector, value) {
+Then('_user set input {selector} with {interpolateValue}', async function (selector, value) {
     const element = await this.page.waitForSelector(selector, {
         visible: true
     });
@@ -15,7 +15,7 @@ Then('user set input {selector} with {interpolateValue}', async function (select
     await this.page.keyboard.type(value);
 });
 
-Then('user set input {selector} with file from path {interpolateValue}', async function (selector, filePath) {
+Then('_user set input {selector} with file from path {interpolateValue}', async function (selector, filePath) {
     const element = await this.page.waitForSelector(selector, {
         visible: true
     });
@@ -24,12 +24,12 @@ Then('user set input {selector} with file from path {interpolateValue}', async f
 
 });
 
-Then('wait for {int} seconds',async function(time){
+Then('_wait for {int} seconds',async function(time){
     await this.page.waitFor(time*1000);
 })
 
 
-Then('{selector} input value should contain {interpolateValue}', async function (selectorName, expectedValue) {
+Then('_{selector} input value should contain {interpolateValue}', async function (selectorName, expectedValue) {
     const content = await this.page.evaluate((aselector) => {
         const element = document.querySelector(aselector);
         return element.value;
@@ -38,7 +38,7 @@ Then('{selector} input value should contain {interpolateValue}', async function 
     assert(content.trim().toLowerCase().includes(expectedValue.trim().toLowerCase()));
 });
 
-Then('{selector} input value should NOT contain {interpolateValue}', async function (selectorName, expectedValue) {
+Then('_{selector} input value should NOT contain {interpolateValue}', async function (selectorName, expectedValue) {
     const content = await this.page.evaluate((aselector) => {
         const element = document.querySelector(aselector);
         return element.value;
@@ -47,7 +47,7 @@ Then('{selector} input value should NOT contain {interpolateValue}', async funct
     assert(!content.trim().toLowerCase().includes(expectedValue.trim().toLowerCase()));
 });
 
-Then('user fill up form', async function (tableForm) {
+Then('_user fill up form', async function (tableForm) {
 
     const properties = tableForm.raw();
 
