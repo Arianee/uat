@@ -69,6 +69,8 @@ Before(async function () {
     this.page = await this.browser.newPage();
     await this.page.setUserAgent('puppeteer');
 
+    console.info("puppeteer page is accessible at this.page");
+
 });
 
 After(async function () {
