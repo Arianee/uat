@@ -61,7 +61,7 @@ Before(async function () {
         ],
         slowMo: 150,
         headless: isHeadless,
-        defaultViewport: { width: 920, height: 640 }
+        defaultViewport: { width: 340, height: 640 }
     });
 
     this.store={};
