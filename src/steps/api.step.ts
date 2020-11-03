@@ -4,6 +4,8 @@ import assert = require("assert");
 
 
 Then('_api body of {string} is:', async function (title, body) {
+   const interpolated= this.utils.interpolate(body);
+
     this.apiCall[title] = {
         ...this.apiCall[title],
         body: JSON.stringify(JSON.parse(body))

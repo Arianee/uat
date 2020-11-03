@@ -51,6 +51,27 @@ describe('from store',()=>{
         const expectedValue='my Value1 and my value2';
         expect(interpolateFromStore(value,store)).toBe(expectedValue);
     })
+
+    test('it should replace multiple value by store value if not exist 000',()=>{
+        const store={
+            '{{TOKENID}}': 'Value1',
+            '{{AnotherValue}}': 'value2'
+
+        }
+        const value=`
+        "my {{TOKENID}} 
+        
+        and my {{AnotherValue}}"
+        
+        `;
+        const expectedValue=`
+        "my Value1 
+        
+        and my value2"
+        
+        `;
+       expect(interpolateFromStore(value,store)).toBe(expectedValue);
+    })
 })
 
 

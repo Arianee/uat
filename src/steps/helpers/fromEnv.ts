@@ -8,7 +8,7 @@ export const envReplace=(str:string)=>{
 }
 
 export const interpolateFromStore=(value, store)=>{
-    const reg = new RegExp(/.*({{\w*}}).*$/)
+    const reg = new RegExp(/.*({{\w*}}).*$/m)
 
     if(reg.test(value)){
         const storeValue=reg.exec(value)[1];
