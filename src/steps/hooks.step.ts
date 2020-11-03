@@ -66,6 +66,7 @@ Before(async function () {
 
     this.store={};
     this.apiResult={};
+    this.apiBodyResult={};
     this.apiCall={};
     this.utils=utils(this.store)
     this.page = await this.browser.newPage();

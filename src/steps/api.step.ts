@@ -1,4 +1,4 @@
-import {Then} from "cucumber";
+import {Given, Then} from "cucumber";
 import fetch, {Headers} from 'node-fetch';
 import assert = require("assert");
 
@@ -40,6 +40,7 @@ Then('_api user make call {string}', async function (title) {
     const {url, method, body, headers} = this.apiCall[title];
 
     this.apiResult[title] = await fetch(url, {method, body, headers});
+    this.apiBodyResult[title] = await this.apiResult[title].json();
 });
 
 Then('_api result status of {string} should be:', async function (title, tableForm) {
@@ -65,10 +66,16 @@ Then('_api result body of {string} should be:', async function (title, tableForm
         return [name, trueValue];
     }, {});
 
-    const apiResult = await this.apiResult[title].json();
-
+  const body=  this.apiBodyResult[title]
     prepareProperties.forEach(([name, value]) => {
-        assert(apiResult[name].toString() === value.toString(), `${name}: ${apiResult[name].toString()} is not ${value.toString()}`);
+        assert(body[name].toString() === value.toString(), `${name}: ${body[name].toString()} is not ${value.toString()}`);
     })
 });
 
+Given('_store value from api call {string} body property {interpolateValue} as {string}',
+    async function (title, property,key) {
+    const value=  this.apiBodyResult[title][property]
+
+        this.store[key] = value;
+    console.log(value)
+});
