@@ -40,7 +40,9 @@ Then('_api user make call {string}', async function (title) {
     const {url, method, body, headers} = this.apiCall[title];
 
     this.apiResult[title] = await fetch(url, {method, body, headers});
-    this.apiBodyResult[title] = await this.apiResult[title].json();
+    try {
+        this.apiBodyResult[title] = await this.apiResult[title].json();
+    }catch(e){}
 });
 
 Then('_api result status of {string} should be:', async function (title, tableForm) {
