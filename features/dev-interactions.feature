@@ -82,7 +82,6 @@ Feature: Dev can test a lot of thing
       Given _user navigates to 'https://stackoverflow.com/questions/34701436/create-randomly-generated-url-for-content'
       Then _user page should land on 'https://stackoverflow.com/questions/34701436/create-randomly-generated-url-for-content'
 
-      @dev
   Scenario: User can take a screenshot and name it
     Then _take screenshot with file name 'gitIgnoreDirectory/screenshot1.jpg'
 

@@ -1,7 +1,6 @@
-import {Given, Then} from "cucumber";
-import {getRandomInt} from "./helpers/selectDataAttribute";
+import {Then} from "cucumber";
 import FormData from 'form-data'
-import fetch,{Headers} from 'node-fetch';
+import fetch, {Headers} from 'node-fetch';
 import {readFileSync} from "fs";
 
 Then('_user has a w:{interpolateValue} x h:{interpolateValue}',async function(width,height){

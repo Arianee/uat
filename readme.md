@@ -94,6 +94,16 @@ Feature: Dev can test a lot of thing
      Given _store value 'a string' as '{{REGULARSTRING}}'
      Given _debug <== use this to pause
 
+  Scenario: Dev can call POST api
+    Then _api user can 'http 200' with api call:
+      | url              | https://httpbin.org/post |
+      | x-api-key        | 123456                   |
+      | method           | POST                     |
+    Then _api result status of 'http 200' should be:
+      | status           | 200                     |
+    Then _api result body of 'http 200' should be:
+        | url           | https://httpbin.org/post |
+
 ```
 
 

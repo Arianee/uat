@@ -65,6 +65,7 @@ Before(async function () {
     });
 
     this.store={};
+    this.apiResult={};
     this.utils=utils(this.store)
     this.page = await this.browser.newPage();
     await this.page.setUserAgent('puppeteer');
