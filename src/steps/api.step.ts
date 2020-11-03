@@ -8,7 +8,7 @@ Then('_api body of {string} is:', async function (title, body) {
 
     this.apiCall[title] = {
         ...this.apiCall[title],
-        body: JSON.stringify(JSON.parse(body))
+        body: JSON.stringify(JSON.parse(interpolated))
     };
 });
 
