@@ -4,26 +4,18 @@ import FormData from 'form-data'
 import fetch,{Headers} from 'node-fetch';
 import {readFileSync} from "fs";
 
-
-Then('_take screenshot with file name {interpolateValue}', async function (screenshotFileName) {
-
-
-    const heightOfVisiblePage = await this.page.evaluate(() => {
-        var body = document.body,
-            html = document.documentElement;
-
-        return Math.max(body.scrollHeight, body.offsetHeight,
-            html.clientHeight, html.scrollHeight, html.offsetHeight);
-    });
-
+Then('_user has a w:{interpolateValue} x h:{interpolateValue}',async function(width,height){
     await this.page.setViewport({
-        width: 340,
-        height: heightOfVisiblePage,
+        width,
+        height,
         deviceScaleFactor: 1
     });
+})
 
+Then('_take screenshot with file name {interpolateValue}', async function (screenshotFileName) {
     await this.page.screenshot({path: screenshotFileName});
 });
+
 Then('_send screenshot {interpolateValue} to api {interpolateValue}', async function (screenshotFileName, apiURL) {
     const buffer = readFileSync(screenshotFileName);
     const form = new FormData();
