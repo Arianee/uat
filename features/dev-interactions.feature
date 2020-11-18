@@ -28,6 +28,9 @@ Feature: Dev can test a lot of thing
   Scenario: Dev can check after a period of time
     Then _user does not see '.removed-loader' after 5 seconds
 
+  Scenario: Dev can check after few seconds loader disappear
+    Then _user does not see '.removed-loader' after few seconds
+
   Scenario: Dev store from env variable
     Given _store value from process.env.myEnvValue as '{{RANDOMNUMBER}}'
     Given _user set input '#inputId' with '{{RANDOMNUMBER}}'

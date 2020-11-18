@@ -7,6 +7,22 @@ Given('_user sees {selector}', async function (selectorName) {
     });
 });
 
+Given('_user does not see {selector} after few seconds', async function (selectorName) {
+    const selector = this.utils.selectorFactory(selectorName)
+    try {
+        await this.page.waitForSelector(selector, {
+            visible: true,
+            timeout: 2000
+        });
+    } catch (e) {
+
+    }
+
+    await this.page.waitForSelector(selector, {
+        hidden: true
+    });
+});
+
 Given('_user does not see {selector} after {int} seconds', async function (selectorName,timeout) {
     try {
         await this.page.waitForSelector(this.utils.selectorFactory(selectorName), {
