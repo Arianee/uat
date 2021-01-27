@@ -111,4 +111,9 @@ screenshot.png
 
 
 .idea
-gitIgnoreDirectory
+
+## keep the directory but not the file
+
+/gitIgnoreDirectory/**/*.*
+!/gitIgnoreDirectory/**/*.gitkeep
+
