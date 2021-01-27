@@ -1,6 +1,6 @@
 The aim of this library is to easily test your web page with UAT.
 Example from our test:
-``` 
+```Gherkin
 Feature: Dev can test a lot of thing
 
   Background:
@@ -10,8 +10,6 @@ Feature: Dev can test a lot of thing
     Then _user sees '.classSelector'
     Then _user sees '#idSelector'
     Then _user sees 'dataAttributeSelector'
-    Then _user sees 'dataAttributeSelector'
-    Then _user sees '#dynamicContent'
     Then _user sees '<body'
 
   Scenario: Dev can interact different selector
@@ -19,8 +17,8 @@ Feature: Dev can test a lot of thing
     Then _user sees '.hadInteraction'
 
   Scenario: Dev can check content
-    Then 'content' content should contain "simple content"
-    Then 'content' content should not contain "complex content"
+    Then _'content' content should contain "simple content"
+    Then _'content' content should not contain "complex content"
 
   Scenario: Dev can interact with form
     Given _user set input '#inputId' with 'value'
@@ -33,10 +31,10 @@ Feature: Dev can test a lot of thing
   Scenario: Dev store from env variable
     Given _store value from process.env.myEnvValue as '{{RANDOMNUMBER}}'
     Given _user set input '#inputId' with '{{RANDOMNUMBER}}'
-    Given '#inputId' input value should contain 'myenvValue'
+    Given _'#inputId' input value should contain 'myenvValue'
 
   Scenario: Dev can build its own variable with random number
-    Given store value 'randomNumber' as '{{RANDOMNUMBER}}'
+    Given _store value 'randomNumber' as '{{RANDOMNUMBER}}'
     Given _user set input '#inputId' with '{{RANDOMNUMBER}}'
     Given _user set input '#inputId' with 'mycustom-{{RANDOMNUMBER}}'
 
@@ -50,8 +48,8 @@ Feature: Dev can test a lot of thing
       | form inputText   | it is a string |
       | form selectInput | cat            |
       | form inputNumber | 22             |
-    Given 'form inputText' input value should contain 'it is a string'
-    Given 'form inputNumber' input value should contain '22'
+    Given _'form inputText' input value should contain 'it is a string'
+    Given _'form inputNumber' input value should contain '22'
 
   Scenario: Dev can fill up a form quickly
     Given _store value 'a string' as '{{REGULARSTRING}}'
@@ -92,7 +90,7 @@ Feature: Dev can test a lot of thing
 
  Scenario: Dev can pause
      Given _store value 'a string' as '{{REGULARSTRING}}'
-     Given _debug <== use this to pause
+     Given _debug #<== use this to pause
 
   Scenario: Dev can call POST api
     Given _api user can 'http 200' with api call:
@@ -116,8 +114,6 @@ Feature: Dev can test a lot of thing
         | url           | https://httpbin.org/post |
 
     And _store value from api call 'http 200' body property 'url' as '{{URL}}'
-
-
 ```
 
 
@@ -172,10 +168,10 @@ Press any key to continue to next step
 
 Or you can use the ```debug``` step
 
-```
+```Gherkin
  Scenario: Dev can pause
      Given store value 'a string' as '##REGULARSTRING##'
-     Given debug <== use this to pause
+     Given debug #<== use this to pause
 ```
 
 Also you can set ```process.env.headless``` to ```true```
