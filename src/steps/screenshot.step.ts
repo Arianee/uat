@@ -5,8 +5,8 @@ import {readFileSync} from "fs";
 
 Then('_user has a w:{interpolateValue} x h:{interpolateValue}',async function(width,height){
     await this.page.setViewport({
-        width,
-        height,
+        width: parseInt(width),
+        height: parseInt(height),
         deviceScaleFactor: 1
     });
 })
