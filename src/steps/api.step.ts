@@ -12,6 +12,23 @@ Then('_api body of {string} is:', async function (title, body) {
     };
 });
 
+Then('_api typeof body {string} is {string}', async function (title, typeOfBody) {
+    const acceptedTypes = [
+        'undefined', 'object', 'number'
+    ];
+
+    if (acceptedTypes.includes(typeOfBody.toString())) {
+        const body = this.apiBodyResult[title];
+
+        assert(typeof body === typeOfBody.toString());
+    } else {
+        console.error(acceptedTypes.join(', '));
+        throw new Error("accepted type are one of above")
+    }
+
+
+});
+
 Then('_api user can {string} with api call:', async function (title, tableForm) {
     const properties = tableForm.raw();
 

@@ -22,6 +22,7 @@ Feature: Dev can test a lot of thing
     Then _api result status of 'http 404' should be:
       | status           | 404                     |
 
+    @dev
   Scenario: Dev can call POST api
     Given _api user can 'http 200' with api call:
       | url              | https://httpbin.org/post |
@@ -42,5 +43,5 @@ Feature: Dev can test a lot of thing
       | status           | 200                     |
     Then _api result body of 'http 200' should be:
         | url           | https://httpbin.org/post |
-
+    Then _api typeof body 'http 200' is 'object'
     And _store value from api call 'http 200' body property 'url' as '{{URL}}'
