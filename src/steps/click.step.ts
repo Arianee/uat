@@ -8,8 +8,6 @@ Then('_user clicks on {selector}', async function (selector) {
 
         await element.click();
     } catch (err) {
-        await this.page.screenshot({path: 'buddy-screenshot.png'});
-
         throw err
 }
 });

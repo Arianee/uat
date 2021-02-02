@@ -1,7 +1,6 @@
-import {After, Before, defineParameterType} from 'cucumber';
+import {After, Before, defineParameterType, setDefaultTimeout, setDefinitionFunctionWrapper, Status} from 'cucumber';
 import {Browser, Page} from 'puppeteer';
 import {utils} from "./helpers/utils";
-import {setDefinitionFunctionWrapper, setDefaultTimeout} from "cucumber";
 import {askQuestionBeforePassingToNextStep} from "./debug.step";
 
 if (process.env.DEBUG=='true') {
@@ -76,6 +75,18 @@ Before(async function () {
 
 });
 
-After(async function () {
+After(async function (scenario) {
+    if (scenario.result.status === Status.FAILED) {
+        if(process.env.screenshotOnError=== 'false'){
+            console.log('This step has failed. To make a screenshot set process.env.screenshotOnError=true');
+        }
+
+        if(this.page && process.env.screenshotOnError === 'true'){
+            await this.page.screenshot({path: 'failed_step.png'});
+            console.log('check screenshot failed_step.png')
+        }
+    }
     await this.browser.close();
+
 });
+

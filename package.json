@@ -14,7 +14,7 @@
     "test:unit": "./node_modules/.bin/jest",
     "postinstall": "node ./script.js",
     "test:e2e": "myEnvValue=myenvValue headless=true ./node_modules/.bin/cucumber-js ./features/**.feature --require-module ts-node/register --require 'src/steps/**/*.step.ts' -f node_modules/cucumber-pretty",
-    "e2e:dev": "DEBUG=false headless=true myEnvValue='myenvValue' ./node_modules/.bin/cucumber-js features/**.feature --require-module ts-node/register --require 'src/steps/**/*.step.ts' -f node_modules/cucumber-pretty --tags @dev"
+    "e2e:dev": "screenshotOnError=true DEBUG=false headless=true myEnvValue='myenvValue' ./node_modules/.bin/cucumber-js features/**.feature --require-module ts-node/register --require 'src/steps/**/*.step.ts' -f node_modules/cucumber-pretty --tags @dev"
   },
   "files": [
     "common_steps",
