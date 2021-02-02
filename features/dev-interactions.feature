@@ -36,6 +36,12 @@ Feature: Dev can test a lot of thing
     Given _user set input '#inputId' with '{{RANDOMNUMBER}}'
     Given _'#inputId' input value should contain 'myenvValue'
 
+  Scenario: Dev can build its own variable with fakejs
+    Given _store value 'internet.email' as '{{randomEmail}}'
+      Given _store value 'internet.password' as '{{randomPassword}}'
+      Given _store value 'random.number' as '{{randomNumber}}'
+      Given _store value 'random.word' as '{{randomWord}}'
+
   Scenario: Dev can build its own variable with random number
     Given _store value 'randomNumber' as '{{RANDOMNUMBER}}'
     Given _user set input '#inputId' with '{{RANDOMNUMBER}}'

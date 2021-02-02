@@ -4,6 +4,7 @@
   "description": "",
   "main": "dist",
   "scripts": {
+    "preversion": "",
     "prepublish": "npm run build && npm test",
     "postpublish": "npm version minor && git push",
     "build": "tsc",
@@ -24,6 +25,7 @@
   "license": "ISC",
   "dependencies": {
     "cucumber": "^5.1.0",
+    "faker": "^5.2.0",
     "form-data": "^3.0.0",
     "gently-copy": "^3.2.0",
     "node-fetch": "^2.6.1",
