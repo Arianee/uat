@@ -1,15 +1,10 @@
 #  Release notes
 
-**version**: From v1.10.0 to v1.11.0
+**version**: From v1.11.0 to v1.12.0
 
-## **feat (4):**
+## **feat (2):**
+ - feat(content): wait for selector to be visible before checking
  - feat(screenshot): add screenshot on error
- - feat(changelog): add changelog
- - feat(faker): add fakerjs to generate fake variable
- - feat(api): dev can check typeof api result
-
-## **fix (1):**
- - fix(screenshot): cast interpolated viewport sizes
 
 
 
