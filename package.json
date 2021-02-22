@@ -1,6 +1,6 @@
 {
   "name": "@arianee/uat",
-  "version": "1.13.0",
+  "version": "2.0.0",
   "description": "",
   "main": "dist",
   "scripts": {
@@ -13,7 +13,7 @@
     "server": "node_modules/lite-server/bin/lite-server -c lite-server.conf.json",
     "test:unit": "./node_modules/.bin/jest",
     "postinstall": "node ./script.js",
-    "test:e2e": "myEnvValue=myenvValue headless=true ./node_modules/.bin/cucumber-js ./features/**.feature --require-module ts-node/register --require 'src/steps/**/*.step.ts' -f node_modules/cucumber-pretty",
+    "test:e2e": "myEnvValue=myenvValue headless=true ./node_modules/.bin/cucumber-js ./features/**.feature --require-module ts-node/register --require 'src/steps/**/*.step.ts' --format @cucumber/pretty-formatter",
     "e2e:dev": "screenshotOnError=true DEBUG=false headless=true myEnvValue='myenvValue' ./node_modules/.bin/cucumber-js features/**.feature --require-module ts-node/register --require 'src/steps/**/*.step.ts' -f node_modules/cucumber-pretty --tags @dev"
   },
   "files": [
@@ -24,7 +24,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cucumber": "^5.1.0",
+    "@cucumber/cucumber": "^7.0.0",
+    "@cucumber/pretty-formatter": "^1.0.0-alpha.0",
     "faker": "^5.2.0",
     "form-data": "^3.0.0",
     "gently-copy": "^3.2.0",
@@ -37,7 +38,6 @@
     "@babel/node": "^7.7.7",
     "@babel/plugin-transform-async-to-generator": "^7.7.4",
     "@babel/preset-env": "^7.7.7",
-    "@types/cucumber": "^6.0.0",
     "@types/jest": "^24.9.0",
     "@types/node": "^13.1.8",
     "babel-jest": "^25.1.0",

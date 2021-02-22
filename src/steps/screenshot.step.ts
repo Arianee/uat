@@ -1,4 +1,4 @@
-import {Then} from "cucumber";
+import {Then} from "@cucumber/cucumber";
 import FormData from 'form-data'
 import fetch, {Headers} from 'node-fetch';
 import {readFileSync} from "fs";

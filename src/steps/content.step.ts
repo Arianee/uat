@@ -1,4 +1,4 @@
-import {Then} from "cucumber";
+import {Then} from "@cucumber/cucumber";
 import assert = require("assert");
 
 Then('_{selector} content should contain {string}', async function (selectorName, expectedValue) {

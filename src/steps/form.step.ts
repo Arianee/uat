@@ -1,4 +1,4 @@
-import {Given, Then} from "cucumber";
+import {Given, Then} from "@cucumber/cucumber";
 import {getRandomInt, selectorFactory} from "./helpers/selectDataAttribute";
 import assert = require("assert");
 

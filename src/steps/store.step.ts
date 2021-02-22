@@ -1,4 +1,4 @@
-import {Given, Then} from "cucumber";
+import {Given, Then} from "@cucumber/cucumber";
 import {getRandomInt} from "./helpers/selectDataAttribute";
 import {get} from 'lodash';
 import faker from 'faker';

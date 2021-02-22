@@ -1,4 +1,4 @@
-import {Given} from "cucumber";
+import {Given} from "@cucumber/cucumber";
 import assert = require("assert");
 
 Given('_user sees {selector}', async function (selectorName) {

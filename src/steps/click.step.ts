@@ -1,4 +1,4 @@
-import {Then} from "cucumber";
+import {Then} from "@cucumber/cucumber";
 
 Then('_user clicks on {selector}', async function (selector) {
     try {

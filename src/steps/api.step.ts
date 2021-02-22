@@ -1,4 +1,4 @@
-import {Given, Then} from "cucumber";
+import {Given, Then} from "@cucumber/cucumber";
 import fetch, {Headers} from 'node-fetch';
 import assert = require("assert");
 

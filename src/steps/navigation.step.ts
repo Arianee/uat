@@ -1,4 +1,4 @@
-import { Given, setDefaultTimeout, Then } from 'cucumber';
+import { Given, setDefaultTimeout, Then } from '@cucumber/cucumber';
 import {selectorFactory} from "./helpers/selectDataAttribute";
 import {envReplace} from "./helpers/fromEnv";
 import assert = require("assert");

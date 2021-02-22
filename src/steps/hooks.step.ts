@@ -1,4 +1,4 @@
-import {After, Before, defineParameterType, setDefaultTimeout, setDefinitionFunctionWrapper, Status} from 'cucumber';
+import {After, Before, defineParameterType, setDefaultTimeout, setDefinitionFunctionWrapper, Status} from '@cucumber/cucumber';
 import {Browser, Page} from 'puppeteer';
 import {utils} from "./helpers/utils";
 import {askQuestionBeforePassingToNextStep} from "./debug.step";
@@ -20,7 +20,7 @@ setDefinitionFunctionWrapper(function (fn) {
 });
 const puppeteer = require('puppeteer');
 
-declare module 'cucumber' {
+declare module '@cucumber/cucumber' {
 
     interface World {
         browser: Browser,
