@@ -1,11 +1,12 @@
 #  Release notes
 
-**version**: From v1.12.0 to v1.13.0
+**version**: From v1.13.0 to v2.1.0
 
-## **feat (3):**
+## **feat (4):**
+ - feat(postinstall): remove postinstall
+ - feat(bin): add console.log in bin
  - feat(bin): add bin script
  - feat(cucumber): change cucumber package
- - feat(content): wait for selector to be visible before checking
 
 
 
