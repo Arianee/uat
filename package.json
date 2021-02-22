@@ -16,6 +16,10 @@
     "test:e2e": "myEnvValue=myenvValue headless=true ./node_modules/.bin/cucumber-js ./features/**.feature --require-module ts-node/register --require 'src/steps/**/*.step.ts' --format @cucumber/pretty-formatter",
     "e2e:dev": "screenshotOnError=true DEBUG=false headless=true myEnvValue='myenvValue' ./node_modules/.bin/cucumber-js features/**.feature --require-module ts-node/register --require 'src/steps/**/*.step.ts' -f node_modules/cucumber-pretty --tags @dev"
   },
+  "bin": {
+    "uat": "index.bin.js",
+    "@arianee/uat": "index.bin.js"
+  },
   "files": [
     "common_steps",
     "features",
