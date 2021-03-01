@@ -7,6 +7,6 @@ process.argv.slice(2).forEach(function (val, index, array) {
     commandLineArgs.push(val)
 });
 
-const command=`./node_modules/.bin/cucumber-js --require 'common_steps/*.step.js' -f node_modules/cucumber-pretty ${commandLineArgs.join(' ')}`;
+const command=`./node_modules/.bin/cucumber-js --require './node_modules/@arianee/uat/common_steps/*.step.js' -f @cucumber/pretty-formatter ${commandLineArgs.join(' ')}`;
 console.log(command);
 execSync(command, {stdio: 'inherit'});
