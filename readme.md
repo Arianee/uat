@@ -123,20 +123,10 @@ Feature: Dev can test a lot of thing
 npm install @arianee/uat -S
 ```
 
-Because cucumberjs has a little issue with files in node_modules, ``common_steps`` is copy pasted to your cwd.
-So please add to your ``.gitignore``
-```text
-dist/
-browser/
-node/
-
-common_steps/
-```
-
-To execute simply require it with or without your steps
+To execute simply:
 
 ```bash
-"./node_modules/.bin/cucumber-js features/implemented/**/*.feature --require 'dist/steps/*.step.js' --require 'common_steps/*.step.js'",
+"uat features/implemented/**/*.feature",
 
 ```
 
@@ -150,7 +140,7 @@ There is 2 ways to debug.
 You can set ```process.env.DEBUG``` to ```true``` and it will wait for your input to pass to next step.
 
 ```bash
-"DEBUG=true ./node_modules/.bin/cucumber-js features/**.feature --require-module ts-node/register --require 'src/steps/**/*.step.ts' -f node_modules/cucumber-pretty"
+"DEBUG=true uat features/**.feature"
 ```
 It will output in terminal:
 ```
@@ -177,5 +167,5 @@ Or you can use the ```debug``` step
 Also you can set ```process.env.headless``` to ```true```
 
 ```bash
-"DEBUG=true headless=true ./node_modules/.bin/cucumber-js features/**.feature --require-module ts-node/register --require 'src/steps/**/*.step.ts' -f node_modules/cucumber-pretty"
+"DEBUG=true headless=true uat features/**.feature"
 ```
