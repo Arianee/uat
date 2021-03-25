@@ -134,6 +134,24 @@ To execute simply:
 ```process.env.DEBUG``` : setting up debug mode. It will wait for user input to continue to next step.
 ```process.env.headless``` : setting up headless mode of browser. default ```true```
 
+Or you can create ```uat.config.json`` next to your package.json:
+```json
+{
+  "serve": {
+    "dir": "www",
+    "port": 4200
+  },
+  "env": {
+    "myEnvValue": "myEnvValue"
+  },
+  "configuration": {
+    "headless": true,
+    "debug": false,
+    "slowMotion": 150
+  }
+}
+
+````
 # How to debug
 
 There is 2 ways to debug.

@@ -1,0 +1,14 @@
+{
+  "serve": {
+    "dir": "www",
+    "port": 4200
+  },
+  "env": {
+    "myEnvValue": "myEnvValue"
+  },
+  "configuration": {
+    "headless": true,
+    "debug": false,
+    "slowMotion": 150
+  }
+}

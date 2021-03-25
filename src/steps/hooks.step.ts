@@ -2,14 +2,22 @@ import {After, Before, defineParameterType, setDefaultTimeout, setDefinitionFunc
 import {Browser, Page} from 'puppeteer';
 import {utils} from "./helpers/utils";
 import {askQuestionBeforePassingToNextStep} from "./debug.step";
+import {start} from "./helpers/uatConfig/uatConfig";
 
-if (process.env.DEBUG=='true') {
+const readFileSync = require('fs').readFileSync;
+
+const configurationFile = readFileSync('./uat.config.json', {encoding: 'utf8'});
+const {configuration, serve} = start(configurationFile);
+
+const puppeteer = require('puppeteer');
+
+if (configuration.configuration.debug) {
     setDefaultTimeout(3600 * 1000);
 }
 setDefinitionFunctionWrapper(function (fn) {
     return async function (...args) {
         try {
-            if (process.env.DEBUG=='true') {
+            if (configuration.configuration.debug) {
                 await askQuestionBeforePassingToNextStep();
             }
             return await fn.apply(this, args);
@@ -18,7 +26,6 @@ setDefinitionFunctionWrapper(function (fn) {
         }
     };
 });
-const puppeteer = require('puppeteer');
 
 declare module '@cucumber/cucumber' {
 
@@ -51,18 +58,19 @@ defineParameterType({
 
 Before(async function () {
 
-    const isHeadless=process.env.headless !== undefined ? process.env.headless=='true' : true;
 
     this.browser = await puppeteer.launch({
         args: [
             '--disable-web-security',
             '--allow-no-sandbox-job'
         ],
-        slowMo: 150,
-        headless: isHeadless,
+        slowMo:  configuration.configuration.slowMotion,
+        headless: configuration.configuration.headless,
         defaultViewport: { width: 340, height: 640 }
     });
 
+    this.configuration = configuration;
+    this.server =await serve();
     this.store={};
     this.apiResult={};
     this.apiBodyResult={};
@@ -77,16 +85,19 @@ Before(async function () {
 
 After(async function (scenario) {
     if (scenario.result.status === Status.FAILED) {
-        if(process.env.screenshotOnError=== 'false'){
+        if (!this.configuration.configuration.screenshotOnError) {
             console.log('This step has failed. To make a screenshot set process.env.screenshotOnError=true');
         }
 
-        if(this.page && process.env.screenshotOnError === 'true'){
+        if (this.page && this.configuration.configuration.screenshotOnError) {
             await this.page.screenshot({path: 'failed_step.png'});
             console.log('check screenshot failed_step.png')
         }
     }
     await this.browser.close();
+    if (this.server) {
+        this.server.kill();
+    }
 
 });
 
