@@ -6,7 +6,12 @@ import {start} from "./helpers/uatConfig/uatConfig";
 
 const readFileSync = require('fs').readFileSync;
 
-const configurationFile = readFileSync('./uat.config.json', {encoding: 'utf8'});
+let configurationFile;
+try {
+    configurationFile = readFileSync('./uat.config.json', {encoding: 'utf8'});
+} catch {
+    console.log("you can use uat.config.json to set your personalized configuration")
+}
 const {configuration, serve} = start(configurationFile);
 
 const puppeteer = require('puppeteer');
