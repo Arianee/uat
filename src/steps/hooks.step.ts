@@ -1,4 +1,13 @@
-import {After, Before, defineParameterType, setDefaultTimeout, setDefinitionFunctionWrapper, Status} from '@cucumber/cucumber';
+import {
+    After,
+    Before,
+    AfterAll,
+    BeforeAll,
+    defineParameterType,
+    setDefaultTimeout,
+    setDefinitionFunctionWrapper,
+    Status
+} from '@cucumber/cucumber';
 import {Browser, Page} from 'puppeteer';
 import {utils} from "./helpers/utils";
 import {askQuestionBeforePassingToNextStep} from "./debug.step";
@@ -60,6 +69,16 @@ defineParameterType({
     useForSnippets: true
 });
 
+let server;
+BeforeAll(async function () {
+    server = await serve();
+});
+
+AfterAll(async function () {
+    if (server) {
+        server.kill();
+    }
+});
 
 Before(async function () {
 
@@ -75,7 +94,6 @@ Before(async function () {
     });
 
     this.configuration = configuration;
-    this.server =await serve();
     this.store={};
     this.apiResult={};
     this.apiBodyResult={};
@@ -100,9 +118,7 @@ After(async function (scenario) {
         }
     }
     await this.browser.close();
-    if (this.server) {
-        this.server.kill();
-    }
+
 
 });
 

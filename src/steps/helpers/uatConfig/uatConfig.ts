@@ -55,8 +55,9 @@ export function start(customConfig: UatConfig = {}) {
             let serverProcess;
             const port = configuration.serve.port || 4200;
             await new Promise(resolve => {
+                const url = `http://localhost:${port}?`;
                 serverProcess = spawn('npx',
-                    ['http-server', configuration.serve.dir, "--port", port]);
+                    ['http-server', configuration.serve.dir, "--port", port, '--proxy', url]);
                 serverProcess.stdout.on('data', resolve);
             });
 
