@@ -1,3 +1,4 @@
+@api
 Feature: Dev can test a lot of thing
 
   Scenario: Dev can call GET api

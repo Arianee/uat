@@ -9,6 +9,7 @@
   "configuration": {
     "headless": true,
     "debug": false,
-    "slowMotion": 150
+    "slowMotion": 150,
+    "browser": "chromium"
   }
 }

@@ -1,5 +1,11 @@
 import {merge} from "lodash";
-import {booleanCast, booleanFromProcessEnv, isNullOrUndefined, numberFromProcessEnv} from "../misc.helpers";
+import {
+    booleanCast,
+    booleanFromProcessEnv,
+    isNullOrUndefined,
+    numberFromProcessEnv,
+    stringFromProcessEnv
+} from "../misc.helpers";
 
 const {execSync, spawn} = require('child_process');
 
@@ -13,7 +19,8 @@ export interface UatConfig {
         headless?: boolean,
         slowMotion?:number,
         debug?: boolean,
-        screenshotOnError?: boolean
+        screenshotOnError?: boolean,
+        browser?:string
     }
 }
 
@@ -23,12 +30,24 @@ export const defaultUATConfig: UatConfig = {
         headless: booleanFromProcessEnv('headless', true),
         debug: booleanFromProcessEnv('headless', false),
         screenshotOnError: booleanFromProcessEnv('headless', false),
-        slowMotion:numberFromProcessEnv('slowMotion',150)
+        slowMotion:numberFromProcessEnv('slowMotion',150),
+        //'chromium', 'firefox', 'webkit'
+        browser:stringFromProcessEnv('browser','chromium')
+    }
+};
+export const fromProcessEnv: UatConfig = {
+    configuration: {
+        headless: booleanFromProcessEnv('headless', undefined),
+        debug: booleanFromProcessEnv('headless', undefined),
+        screenshotOnError: booleanFromProcessEnv('headless', undefined),
+        slowMotion:numberFromProcessEnv('slowMotion',undefined),
+        //'chromium', 'firefox', 'webkit'
+        browser:stringFromProcessEnv('browser',undefined)
     }
 };
 
 export const extractuatConfiguration = (customConfig: UatConfig = {}): UatConfig => {
-    const config = merge(defaultUATConfig, customConfig);
+    const config = merge(defaultUATConfig, customConfig,fromProcessEnv);
 
     if (config.env) {
         Object.keys(config.env)

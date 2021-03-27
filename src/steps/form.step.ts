@@ -20,8 +20,7 @@ Then('_user set input {selector} with file from path {interpolateValue}', async 
         visible: true
     });
 
-    element.uploadFile(filePath);
-
+    await this.page.setInputFiles(selector, filePath);
 });
 
 Then('_wait for {int} seconds',async function(time){

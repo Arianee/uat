@@ -1,4 +1,6 @@
 The aim of this library is to easily test your web page with UAT.
+You can test chromium, webkit and firefox with one uat.
+
 Example from our test:
 ```Gherkin
 Feature: Dev can test a lot of thing
@@ -147,11 +149,18 @@ Or you can create ```uat.config.json`` next to your package.json:
   "configuration": {
     "headless": true,
     "debug": false,
-    "slowMotion": 150
+    "slowMotion": 150,
+    "browser": "firefox"
   }
 }
 
 ````
+browser can be ```'chromium', 'firefox', 'webkit'```
+You can set browser in process.env to override uat.config.json.
+
+```bash
+browser='webkit' uat
+```
 # How to debug
 
 There is 2 ways to debug.
@@ -185,5 +194,5 @@ Or you can use the ```debug``` step
 Also you can set ```process.env.headless``` to ```true```
 
 ```bash
-"DEBUG=true headless=true uat features/**.feature"
+"DEBUG=true uat features/**.feature"
 ```

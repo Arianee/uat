@@ -8,11 +8,10 @@ import {
     setDefinitionFunctionWrapper,
     Status
 } from '@cucumber/cucumber';
-import {Browser, Page} from 'puppeteer';
 import {utils} from "./helpers/utils";
 import {askQuestionBeforePassingToNextStep} from "./debug.step";
 import {start} from "./helpers/uatConfig/uatConfig";
-
+import playwright, {Page, Browser} from 'playwright';
 const readFileSync = require('fs').readFileSync;
 
 let configurationFile;
@@ -22,8 +21,6 @@ try {
     console.log("you can use uat.config.json to set your personalized configuration")
 }
 const {configuration, serve} = start(configurationFile);
-
-const puppeteer = require('puppeteer');
 
 if (configuration.configuration.debug) {
     setDefaultTimeout(3600 * 1000);
@@ -82,15 +79,11 @@ AfterAll(async function () {
 
 Before(async function () {
 
-
-    this.browser = await puppeteer.launch({
-        args: [
-            '--disable-web-security',
-            '--allow-no-sandbox-job'
-        ],
+    console.log('browser', configuration.configuration.browser);
+    this.browser = await playwright[configuration.configuration.browser]
+        .launch({
         slowMo:  configuration.configuration.slowMotion,
-        headless: configuration.configuration.headless,
-        defaultViewport: { width: 340, height: 640 }
+            headless: configuration.configuration.headless
     });
 
     this.configuration = configuration;
@@ -99,10 +92,8 @@ Before(async function () {
     this.apiBodyResult={};
     this.apiCall={};
     this.utils=utils(this.store)
-    this.page = await this.browser.newPage();
-    await this.page.setUserAgent('puppeteer');
-
-    console.info("puppeteer page is accessible at this.page");
+    this.page = await this.browser
+        .newPage();
 
 });
 

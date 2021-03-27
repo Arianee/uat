@@ -1,3 +1,4 @@
+@front
 Feature: Dev can test a lot of thing
 
   Background:

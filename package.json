@@ -13,7 +13,7 @@
     "server": "npx http-server 'www' -p 4200",
     "test:unit": "./node_modules/.bin/jest",
     "test:e2e": "node index.bin.js ./features/**.feature",
-    "e2e:dev": "screenshotOnError=true DEBUG=false headless=true myEnvValue='myenvValue' ./node_modules/.bin/cucumber-js features/**.feature --require-module ts-node/register --require 'src/steps/**/*.step.ts' -f node_modules/cucumber-pretty --tags @dev"
+    "e2e:dev": "npm run test:e2e -- --tags @dev"
   },
   "bin": {
     "uat": "index.bin.js"
@@ -32,7 +32,7 @@
     "form-data": "^3.0.0",
     "gently-copy": "^3.2.0",
     "node-fetch": "^2.6.1",
-    "puppeteer": "^2.0.0"
+    "playwright": "^1.10.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.7",
