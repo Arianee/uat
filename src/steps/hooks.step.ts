@@ -12,6 +12,8 @@ import {utils} from "./helpers/utils";
 import {askQuestionBeforePassingToNextStep} from "./debug.step";
 import {start} from "./helpers/uatConfig/uatConfig";
 import playwright, {Page, Browser} from 'playwright';
+import {sendSlackMessage} from "./helpers/sendSlack";
+import {execSync} from "child_process";
 const readFileSync = require('fs').readFileSync;
 
 let configurationFile;
@@ -104,8 +106,26 @@ After(async function (scenario) {
         }
 
         if (this.page && this.configuration.configuration.screenshotOnError) {
+
             await this.page.screenshot({path: 'failed_step.png'});
-            console.log('check screenshot failed_step.png')
+            console.log('check screenshot failed_step.png');
+            if (this.configuration.configuration.slack) {
+
+                let gitCommit;
+                try {
+                    gitCommit = execSync('git rev-parse HEAD');
+                } catch (e) {
+                    console.error("git is not installed");
+                }
+
+                const {channel, token} = this.configuration.configuration.slack;
+                await sendSlackMessage({
+                    channel,
+                    token,
+                    imgPath: 'failed_step.png',
+                    message: `One of your test failed ${gitCommit}: ${JSON.stringify(scenario.result)} `
+                })
+            }
         }
     }
     await this.browser.close();

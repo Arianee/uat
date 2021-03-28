@@ -20,7 +20,11 @@ export interface UatConfig {
         slowMotion?:number,
         debug?: boolean,
         screenshotOnError?: boolean,
-        browser?:string
+        browser?:string ,
+        slack?:{
+            channel:string,
+            token:string
+        };
     }
 }
 

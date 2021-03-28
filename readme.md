@@ -151,7 +151,11 @@ Or you can create ```uat.config.json`` next to your package.json:
     "debug": false,
     "slowMotion": 150,
     "browser": "firefox"
-  }
+  },
+    "slack": {
+      "channel": "EL92Z0YDAS",
+      "token": "xoxb-16691938847-0905975044378-tk80eRgZ4nBPiQEgeBmYUV5D"
+    }
 }
 
 ````

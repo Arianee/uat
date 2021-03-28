@@ -10,6 +10,7 @@
     "headless": true,
     "debug": false,
     "slowMotion": 150,
-    "browser": "chromium"
+    "browser": "chromium",
+    "screenshotOnError": true
   }
 }
