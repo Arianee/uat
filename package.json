@@ -13,7 +13,7 @@
     "server": "npx http-server 'www' -p 4200",
     "test:unit": "./node_modules/.bin/jest",
     "test:e2e": "node index.bin.js ./features/**.feature",
-    "e2e:dev": "npm run test:e2e -- --tags @dev"
+    "e2e:dev": "headless=false npm run test:e2e -- --tags @dev"
   },
   "bin": {
     "uat": "index.bin.js"
@@ -33,6 +33,7 @@
     "form-data": "^3.0.0",
     "gently-copy": "^3.2.0",
     "node-fetch": "^2.6.1",
+    "onecolor": "^3.1.0",
     "playwright": "^1.10.0"
   },
   "devDependencies": {

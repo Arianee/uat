@@ -3,6 +3,20 @@
 <head>
     <title>Simple html file to test</title>
 </head>
+<style>
+    .yellow-bg {
+        font-family: 'Arial';
+        background-color: yellow;
+    }
+
+    .red-bg {
+        background-color: red;
+    }
+
+    .red-font {
+        color: red
+    }
+</style>
 <script>
     setTimeout(() => {
         var node = document.createElement("LI");
@@ -53,6 +67,13 @@ page toute simple
 
 <div data-e2e="contentToStore">Content to retrieve</div>
 
+<div data-e2e="yellow-bg_red-font" id="john"
+     class="yellow-bg red-font">
+    Hello yellow bd and red font
+    <div class="red-bg" data-e2e="red-bg_red-font">
+        Hello red bd and red font
+    </div>
+</div>
 </body>
 <script>
     var inputElement = document.getElementById("inputField");
@@ -62,8 +83,6 @@ page toute simple
         console.log(this.files)
         if(this.files[0].size>0){
             inputElement.classList.add("file-Uploaded");
-
-
         }
     }
 </script>

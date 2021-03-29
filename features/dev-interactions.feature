@@ -16,6 +16,13 @@ Feature: Dev can test a lot of thing
     When _user clicks on '#button1'
     Then _user sees '.hadInteraction'
 
+  Scenario: Dev can check css style of selector
+    Then _user sees color of 'yellow-bg_red-font' as 'red'
+    Then _user sees background-color of 'yellow-bg_red-font' as 'yellow'
+    Then _user sees color of 'yellow-bg_red-font' as 'red'
+    Then _user sees background-color of 'red-bg_red-font' as 'red'
+    Then _user sees font-family of 'red-bg_red-font' as 'Arial'
+
   Scenario: Dev can check content
     Then _'content' content should contain "simple content"
     Then _'content' content should not contain "complex content"
