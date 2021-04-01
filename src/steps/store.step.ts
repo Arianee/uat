@@ -22,3 +22,6 @@ Given('_store value {interpolateValue} as {string}', async function (value, key)
     }
 });
 
+Given('_store value {interpolateValue} in local storage as {string}', async function(value, key){
+    await this.page.evaluate(({value, key}) => window.localStorage.setItem(key, value), {value,key});
+})

@@ -115,3 +115,6 @@ Feature: Dev can test a lot of thing
   Scenario: Dev can upload file
     Then _user set input 'inputFile' with file from path 'package.json'
     Then _user sees '.file-Uploaded'
+
+  Scenario: User can store a value in local storage
+    Given _store value 'storedValue' in local storage as 'storageKey'

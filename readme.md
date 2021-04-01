@@ -109,6 +109,12 @@ It can be useful to test url without specifying host:
     Given _user navigates to '{{MyURL}}/account/create'
 ```
 
+You can store a value in the local storage
+```gherkin
+    Given _store value 'storedValue' in local storage as 'storageKey'
+```
+
+
 ### Take Screenshot and send it
 ```gherkin
 
