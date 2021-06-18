@@ -89,6 +89,9 @@ Feature: Dev can test a lot of thing
     Given _user set input 'form inputText' with '{{LINK}}'
     Given _'form inputText' input value should contain 'Content to retrieve'
 
+  Scenario: Dev can check inner text
+    Then _'contentToStore' inner text value should contain 'Content to retrieve'
+
   Scenario: Dev can retrieve and store content of div
     Given _store content value from selector 'contentToStore' as '{{LINK}}'
     Given _user fill up form
@@ -118,3 +121,8 @@ Feature: Dev can test a lot of thing
 
   Scenario: User can store a value in local storage
     Given _store value 'storedValue' in local storage as 'storageKey'
+
+  Scenario: Dev can override language
+    Given _user ordered favorite languages are 'en,fr-BE'
+    Given _user navigates to 'http://localhost:4200'
+    Given _'#favoriteLanguage' inner text value should contain 'en,fr-BE'

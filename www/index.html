@@ -39,7 +39,7 @@
     }, 3000)
 </script>
 <body>
-
+<div id="favoriteLanguage"></div>
 <div id="idSelector">Visible</div>
 <div class="classSelector">Visible</div>
 <div data-e2e="dataAttributeSelector">Visible</div>
@@ -75,6 +75,10 @@ page toute simple
     </div>
 </div>
 </body>
+<script>
+    var favLangEl = document.getElementById('favoriteLanguage');
+    favLangEl.innerText = navigator.languages.join(',')
+</script>
 <script>
     var inputElement = document.getElementById("inputField");
     inputElement.addEventListener("change", handleFiles, false);

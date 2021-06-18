@@ -5,7 +5,7 @@ import assert = require("assert");
 setDefaultTimeout(60 * 1000);
 
 Given('_user navigates to {interpolateValue}',async function(url){
-    await this.page.goto(envReplace(url));
+    await this.page.goto(envReplace(url),{waitUntil:'load'});
 })
 
 Then('_{selector} is displayed', async function (selector) {

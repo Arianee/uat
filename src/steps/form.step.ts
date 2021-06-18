@@ -28,12 +28,18 @@ Then('_wait for {int} seconds',async function(time){
 })
 
 
+Then('_{selector} inner text value should contain {interpolateValue}', async function (selectorName, expectedValue) {
+    const content = await this.page.innerText(selectorName);
+    assert(content.trim().toLowerCase().includes(expectedValue.trim().toLowerCase()));
+});
+
 Then('_{selector} input value should contain {interpolateValue}', async function (selectorName, expectedValue) {
     const content = await this.page.evaluate((aselector) => {
         const element = document.querySelector(aselector);
         return element.value;
     }, selectorName);
 
+    assert(content, `content from ${selectorName} is empty`);
     assert(content.trim().toLowerCase().includes(expectedValue.trim().toLowerCase()));
 });
 
