@@ -1,14 +1,14 @@
 #  Release notes
 
-**version**: From v2.12.0 to v2.13.0
+**version**: From v2.13.0 to v2.14.0
 
 ## **feat (2):**
+ - feat(config): set custom config path
  - feat(language): override language
- - feat(storage): can store a value in localstorage
 
 ## **chore (2):**
- - chore(deps): bump lodash from 4.17.15 to 4.17.21
- - chore(deps): bump y18n from 4.0.0 to 4.0.1
+ - chore(deps): bump browserslist from 4.8.3 to 4.16.6
+ - chore(deps): bump hosted-git-info from 2.8.8 to 2.8.9
 
 
 
