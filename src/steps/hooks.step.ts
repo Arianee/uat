@@ -17,8 +17,9 @@ import {execSync} from "child_process";
 const readFileSync = require('fs').readFileSync;
 
 let configurationFile;
+const uatConfigJSON = process.env.uatConfig || './uat.config.json';
 try {
-    configurationFile = readFileSync('./uat.config.json', {encoding: 'utf8'});
+    configurationFile = readFileSync(uatConfigJSON, {encoding: 'utf8'});
 } catch {
     console.log("you can use uat.config.json to set your personalized configuration")
 }
