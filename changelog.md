@@ -1,10 +1,10 @@
 #  Release notes
 
-**version**: From v2.13.0 to v2.14.0
+**version**: From v2.14.0 to v2.15.0
 
 ## **feat (2):**
+ - feat(version): set version of dependencies
  - feat(config): set custom config path
- - feat(language): override language
 
 ## **chore (2):**
  - chore(deps): bump browserslist from 4.8.3 to 4.16.6

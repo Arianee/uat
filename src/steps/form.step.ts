@@ -1,6 +1,7 @@
 import {Given, Then} from "@cucumber/cucumber";
 import {getRandomInt, selectorFactory} from "./helpers/selectDataAttribute";
 import assert = require("assert");
+import {waitFor} from "./helpers/waitFor";
 
 Given('_user enter {interpolateValue}', async function (value) {
     await this.page.keyboard.type(value);
@@ -24,9 +25,12 @@ Then('_user set input {selector} with file from path {interpolateValue}', async 
 });
 
 Then('_wait for {int} seconds',async function(time){
-    await this.page.waitFor(time*1000);
+    await waitFor(+time * 1000)
 })
 
+Then('_wait for {int} milliseconds',async function(time){
+    await waitFor(+time)
+})
 
 Then('_{selector} inner text value should contain {interpolateValue}', async function (selectorName, expectedValue) {
     const content = await this.page.innerText(selectorName);

@@ -119,6 +119,12 @@ Feature: Dev can test a lot of thing
     Then _user set input 'inputFile' with file from path 'package.json'
     Then _user sees '.file-Uploaded'
 
+  @dev
+  Scenario: User wait for n seconds/miliseconds
+    Given _wait for 1 seconds
+    Given _wait for 1 milliseconds
+
+
   Scenario: User can store a value in local storage
     Given _store value 'storedValue' in local storage as 'storageKey'
 
