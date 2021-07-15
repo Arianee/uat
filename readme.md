@@ -271,6 +271,11 @@ Feature: Dev can test a lot of thing
          }
         """
 
+  Scenario: User wait for n seconds/miliseconds
+    Given _wait for 1 seconds
+    Given _wait for 1 milliseconds
+
+
  Scenario: Dev can pause
      Given _store value 'a string' as '{{REGULARSTRING}}'
      Given _debug #<== use this to pause
