@@ -14,6 +14,7 @@ import {start} from "./helpers/uatConfig/uatConfig";
 import playwright, {Page, Browser} from 'playwright';
 import {sendSlackMessage} from "./helpers/sendSlack";
 import {execSync} from "child_process";
+import process from "process";
 const readFileSync = require('fs').readFileSync;
 
 let configurationFile;
@@ -78,6 +79,7 @@ AfterAll(async function () {
     if (server) {
         server.kill();
     }
+    process.exit()
 });
 
 Before(async function () {
