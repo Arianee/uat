@@ -13,3 +13,6 @@ Then('_user clicks on {selector}', async function (selector) {
 });
 
 
+Then('_user presses down on keyboard key {interpolateValue}', async function (value) {
+    await this.page.keyboard.down(value);
+});
