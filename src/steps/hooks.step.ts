@@ -18,6 +18,7 @@ import process from "process";
 const readFileSync = require('fs').readFileSync;
 
 let configurationFile;
+let hasBeenInErrorOnce = false;
 const uatConfigJSON = process.env.uatConfig || './uat.config.json';
 try {
     configurationFile = readFileSync(uatConfigJSON, {encoding: 'utf8'});
@@ -75,11 +76,13 @@ BeforeAll(async function () {
     server = await serve();
 });
 
-AfterAll(async function () {
+AfterAll(async function (hey) {
     if (server) {
         server.kill();
     }
-    process.exit()
+
+    const errorCode = hasBeenInErrorOnce ? 1 : 0;
+    process.exit(errorCode);
 });
 
 Before(async function () {
@@ -104,6 +107,7 @@ Before(async function () {
 
 After(async function (scenario) {
     if (scenario.result.status === Status.FAILED) {
+        hasBeenInErrorOnce = true;
         if (!this.configuration.configuration.screenshotOnError) {
             console.log('This step has failed. To make a screenshot set process.env.screenshotOnError=true');
         }
