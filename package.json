@@ -10,7 +10,7 @@
     "build": "tsc",
     "build:w": "tsc --watch",
     "test": "npm run test:unit && npm run test:e2e",
-    "server": "npx http-server 'www' -p 4200",
+    "server": "lite-server -c lite-server.config.js",
     "test:unit": "./node_modules/.bin/jest",
     "test:e2e": "node index.bin.js ./features/**.feature",
     "e2e:dev": "headless=false npm run test:e2e -- --tags @dev"
@@ -32,6 +32,7 @@
     "faker": "5.2.x",
     "form-data": "3.0.x",
     "gently-copy": "3.2.x",
+    "lite-server": "^2.6.1",
     "node-fetch": "2.6.x",
     "onecolor": "3.1.x",
     "playwright": "1.10.x"
