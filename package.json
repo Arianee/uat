@@ -4,7 +4,6 @@
   "description": "",
   "main": "dist",
   "scripts": {
-    "preversion": "gitool -pao=changelog.md --tag=1",
     "prepublish": "npm run build && npm test",
     "postpublish": "npm version minor && git push",
     "build": "tsc",
