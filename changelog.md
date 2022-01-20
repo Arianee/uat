@@ -1,28 +1,18 @@
 #  Release notes
 
-**version**: From v2.12.0 to v2.13.0
+**version**: From v2.24.0 to v2.25.0
 
-## **feat (8):**
- - feat(step): add absolute path for steps
- - feat(step): exit with code 1 if on step failed
- - feat(step): add press keyboard key
- - feat(wait): add waitFor step
- - feat(version): set version of dependencies
- - feat(config): set custom config path
- - feat(language): override language
- - feat(storage): can store a value in localstorage
+## **feat (3):**
+ - feat(travis): add os
+ - feat(bump): bump playwright
+ - feat(commandLine): script before
 
-## **chore (7):**
- - chore(deps): bump axios from 0.21.1 to 0.21.4
- - chore(deps): bump tmpl from 1.0.4 to 1.0.5
- - chore(deps): bump path-parse from 1.0.6 to 1.0.7
- - chore(deps): bump browserslist from 4.8.3 to 4.16.6
- - chore(deps): bump hosted-git-info from 2.8.8 to 2.8.9
- - chore(deps): bump lodash from 4.17.15 to 4.17.21
- - chore(deps): bump y18n from 4.0.0 to 4.0.1
+## **chore (2):**
+ - chore(deps): bump shelljs from 0.8.4 to 0.8.5
+ - chore(deps): bump follow-redirects from 1.14.4 to 1.14.7
 
 ## **fix (1):**
- - fix(exit): exit properly
+ - fix(commandLine): re add command line to be able to pass @tags
 
 
 

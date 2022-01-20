@@ -1,10 +1,9 @@
 {
   "name": "@arianee/uat",
-  "version": "2.22.0",
+  "version": "2.30.0",
   "description": "",
   "main": "dist",
   "scripts": {
-    "preversion": "gitool -pao=changelog.md --tag=1",
     "prepublish": "npm run build && npm test",
     "postpublish": "npm version minor && git push",
     "build": "tsc",
@@ -35,7 +34,7 @@
     "lite-server": "^2.6.1",
     "node-fetch": "2.6.x",
     "onecolor": "3.1.x",
-    "playwright": "1.10.x"
+    "playwright": "1.17.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.7",
