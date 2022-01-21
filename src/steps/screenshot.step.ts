@@ -4,7 +4,7 @@ import fetch, {Headers} from 'node-fetch';
 import {readFileSync} from "fs";
 
 Then('_user has a w:{interpolateValue} x h:{interpolateValue}',async function(width,height){
-    await this.page.setViewport({
+    await this.page.setViewportSize({
         width: parseInt(width),
         height: parseInt(height),
         deviceScaleFactor: 1
