@@ -123,6 +123,8 @@ Feature: Dev can test a lot of thing
     Given _wait for 1 seconds
     Given _wait for 1 milliseconds
 
+  Scenario: User can change viewport size
+    Given _user has a w:'400' x h:'700'
 
   Scenario: User can store a value in local storage
     Given _store value 'storedValue' in local storage as 'storageKey'
