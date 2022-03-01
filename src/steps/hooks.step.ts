@@ -77,7 +77,6 @@ BeforeAll(async function () {
 });
 
 AfterAll(async function (hey) {
-    console.log('error after all')
     if (server) {
         server.kill();
     }
