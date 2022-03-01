@@ -77,6 +77,7 @@ BeforeAll(async function () {
 });
 
 AfterAll(async function (hey) {
+    console.log('error after all')
     if (server) {
         server.kill();
     }
@@ -86,8 +87,6 @@ AfterAll(async function (hey) {
 });
 
 Before(async function () {
-
-    console.log('browser', configuration.configuration.browser);
     this.browser = await playwright[configuration.configuration.browser]
         .launch({
         slowMo:  configuration.configuration.slowMotion,
@@ -107,6 +106,7 @@ Before(async function () {
 
 After(async function (scenario) {
     if (scenario.result.status === Status.FAILED) {
+        server.kill();
         hasBeenInErrorOnce = true;
         if (!this.configuration.configuration.screenshotOnError) {
             console.log('This step has failed. To make a screenshot set process.env.screenshotOnError=true');
