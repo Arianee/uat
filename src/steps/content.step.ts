@@ -41,7 +41,7 @@ Then('_store content value from selector {selector} as {string}', async function
     this.store[propertyName] = content;
 });
 
-Then('_{selector} {string} is {interpolateValue}', async function (selectorName, attribute, expectedValue) {
+Then('_{selector} attribute {string} is {interpolateValue}', async function (selectorName, attribute, expectedValue) {
     let content = await this.page.evaluate((obj) => {
         const {aselector, aattribute} = obj;
         const element = document.querySelector(aselector);

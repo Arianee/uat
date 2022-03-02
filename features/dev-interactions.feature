@@ -135,8 +135,8 @@ Feature: Dev can test a lot of thing
     Given _'#favoriteLanguage' inner text value should contain 'en,fr-BE'
 
   Scenario: Dev can query attribute
-    Given _'myDisableAttribute' 'class' is 'my-class'
-    Given _'myDisableAttribute' 'type' is 'text'
-    Given _'myDisableAttribute' 'disabled' is 'true'
-    Given _'myDisableAttribute2' 'disabled' is 'true'
-    Given _'myEnableAttribute' 'disabled' is 'false'
+    Given _'myDisableAttribute' attribute 'class' is 'my-class'
+    Given _'myDisableAttribute' attribute 'type' is 'text'
+    Given _'myDisableAttribute' attribute 'disabled' is 'true'
+    Given _'myDisableAttribute2' attribute 'disabled' is 'true'
+    Given _'myEnableAttribute' attribute 'disabled' is 'false'
