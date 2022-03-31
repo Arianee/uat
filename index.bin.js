@@ -11,6 +11,6 @@ process.argv.slice(2).forEach(function (val, index, array) {
 const commonStepsPath = path.join(__dirname, 'common_steps','*.step.js');
 const customStepsPath = path.join(process.cwd(), 'custom_steps','*.step.js');
 
-const command=`npx cucumber-js --require "${commonStepsPath}" --require "${customStepsPath}" -f @cucumber/pretty-formatter`;
+const command=`npx cucumber-js --require "${commonStepsPath}" --require "${customStepsPath}" -f @cucumber/pretty-formatter ${commandLineArgs.join(' ')}`;
 console.log(command);
 execSync(command, {stdio: 'inherit'});
