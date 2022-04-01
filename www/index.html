@@ -29,14 +29,22 @@
         element.classList.add("hadInteraction");
     }
 
-    function removeClass() {
-        var element = document.getElementById("removeClassId");
-        element.classList.remove("removed-loader");
+    function removeClass1() {
+        var element = document.getElementById("removeClassId1");
+        element.classList.remove("removed-loader1");
+    }
+    function removeClass2() {
+        var element = document.getElementById("removeClassId2");
+        element.classList.remove("removed-loader2");
     }
 
     setTimeout(() => {
-        removeClass();
-    }, 3000)
+        removeClass1();
+    }, 4000)
+
+    setTimeout(() => {
+        removeClass2();
+    }, 1000)
 </script>
 <body>
 <div id="favoriteLanguage"></div>
@@ -52,7 +60,10 @@ page toute simple
 
 <input id="inputId">
 
-<div id="removeClassId" class="removed-loader">I am a loader</div>
+<div id="removeClassId1" class="removed-loader1">I am a loader</div>
+<div id="removeClassId2" class="removed-loader2">I am a loader</div>
+<div data-e2e="displayNone" style="display: none">I am a loader</div>
+<div data-e2e="hidden" hidden>I am a loader</div>
 
 <form data-e2e="form">
     <input type="text" data-e2e="inputText"/>

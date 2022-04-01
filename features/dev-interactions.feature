@@ -34,10 +34,13 @@ Feature: Dev can test a lot of thing
     Given _'#inputId' input value should NOT contain 'notTheVal'
 
   Scenario: Dev can check after a period of time
-    Then _user does not see '.removed-loader' after 5 seconds
+    Then _user does not see '.removed-loader1' after 5 seconds
 
   Scenario: Dev can check after few seconds loader disappear
-    Then _user does not see '.removed-loader' after few seconds
+    Then _user does not see '.removed-loader2' after few seconds
+    Then _user does not see 'displayNone' after few seconds
+    Then _user does not see 'hidden' after few seconds
+
 
   Scenario: Dev store from env variable
     Given _store value from process.env.myEnvValue as '{{RANDOMNUMBER}}'

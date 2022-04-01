@@ -11,29 +11,31 @@ Given('_user does not see {selector} after few seconds', async function (selecto
     const selector = this.utils.selectorFactory(selectorName)
     try {
         await this.page.waitForSelector(selector, {
-            visible: true,
+            state:'visible',
             timeout: 2000
         });
     } catch (e) {
+        console.error('here')
 
     }
 
     await this.page.waitForSelector(selector, {
-        hidden: true
+        state:'hidden',
+        timeout: 2000
     });
 });
 
 Given('_user does not see {selector} after {int} seconds', async function (selectorName,timeout) {
     try {
         await this.page.waitForSelector(this.utils.selectorFactory(selectorName), {
-            visible: true,
+            state:'visible',
             timeout: 3000
         });
     } catch (e) {
     }
 
     await this.page.waitForSelector(this.utils.selectorFactory(selectorName), {
-        hidden: true,
+        state:'hidden',
         timeout: timeout*1000
     });
 });
