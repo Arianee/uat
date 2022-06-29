@@ -15,6 +15,8 @@ Feature: Dev can test a lot of thing
   Scenario: Dev can interact different selector
     When _user clicks on '#button1'
     Then _user sees '.hadInteraction'
+    Then _user sees 2 'multiple-element'
+    Then _user sees 1 'single-element'
 
   Scenario: Dev can check css style of selector
     Then _user sees color of 'yellow-bg_red-font' as 'red'
