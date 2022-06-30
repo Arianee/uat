@@ -87,6 +87,16 @@ Given _user fill up form
       | form inputNumber | 22             |
 ```
 
+### Wallet Connect
+```gherkin
+Then walletConnect connect to 'wallet-connect-qrcode' // walletconnect uri should be in data-wcuri
+Then _user wait for session request
+Then _user has wallet 'film mammal dove visual enrich mango cement panther gown shadow owner slush' as 'wallet1'
+Given _user wallet accepts wallet connect request on chain 1 and wallet 'wallet1'
+Then _user wait for personal signature request
+Then _user wallet accepts last personal signature
+```
+
 ### Use custom variable
 
 @arianee/uat allows you to use your own variable. We use [fakejs](https://github.com/marak/Faker.js/).
@@ -168,7 +178,8 @@ It will pause until you press any key.
     "debug": false, // step by step debug
     "slowMotion": 150, // speed user does each action
     "browser": "chromium", // browser to test
-    "screenshotOnError": true // take a screenshot on error
+    "screenshotOnError": true // take a screenshot on error,
+    "walletConnectBridge": false // open a wallet connect bridge on port 5001
   }
 }
 ```

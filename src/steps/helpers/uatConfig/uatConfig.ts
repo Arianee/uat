@@ -6,6 +6,7 @@ import {
     numberFromProcessEnv,
     stringFromProcessEnv
 } from "../misc.helpers";
+import path from "path";
 
 const {execSync, spawn} = require('child_process');
 
@@ -25,6 +26,7 @@ export interface UatConfig {
             channel:string,
             token:string
         };
+        walletConnectBridge?: boolean
     }
 }
 
@@ -91,8 +93,22 @@ export function start(customConfig: UatConfig = {}) {
 
     };
 
+    const walletConnectBridgeStart = async ()=>{
+        if (configuration.configuration.walletConnectBridge) {
+            let wcBridgeProcess;
+            const dockercomposePath = path.join(__dirname,'..','..','..', 'docker-compose.yml');
+            await new Promise(resolve => {
+                wcBridgeProcess = spawn('docker-compose',
+                  ['-f', dockercomposePath, 'up', 'wallet-connect-bridge']);
+                wcBridgeProcess.stdout.on('data', resolve);
+            })
+            return wcBridgeProcess;
+        }
+    }
+
     return {
         configuration,
-        serve: start
+        serve: start,
+        walletConnectBridgeStart
     };
 }

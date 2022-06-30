@@ -25,7 +25,7 @@ try {
 } catch {
     console.log("you can use uat.config.json to set your personalized configuration")
 }
-const {configuration, serve} = start(configurationFile);
+const {configuration, serve, walletConnectBridgeStart} = start(configurationFile);
 
 if (configuration.configuration.debug) {
     setDefaultTimeout(3600 * 1000);
@@ -72,13 +72,20 @@ defineParameterType({
 });
 
 let server;
+let walletConnectBridge;
 BeforeAll(async function () {
     server = await serve();
+    walletConnectBridge = await walletConnectBridgeStart();
 });
 
-AfterAll(async function (hey) {
+AfterAll(async function () {
     if (server) {
         server.kill();
+    }
+
+    if(walletConnectBridge){
+        execSync('docker-compose stop')
+        walletConnectBridge.kill();
     }
 
     const errorCode = hasBeenInErrorOnce ? 1 : 0;
