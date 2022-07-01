@@ -12,6 +12,6 @@
     "slowMotion": 150,
     "browser": "chromium",
     "screenshotOnError": true,
-    "walletConnectBridge": true
+    "walletConnectBridge": false
   }
 }
