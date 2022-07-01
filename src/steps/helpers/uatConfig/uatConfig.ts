@@ -100,7 +100,11 @@ export function start(customConfig: UatConfig = {}) {
             await new Promise(resolve => {
                 wcBridgeProcess = spawn('docker-compose',
                   ['-f', dockercomposePath, 'up', 'wallet-connect-bridge']);
-                wcBridgeProcess.stdout.on('data', resolve);
+                wcBridgeProcess.stdout.on('data', (data)=>{
+                    if(Buffer.from(data).toString().includes('Server listening at http://0.0.0.0:5001')){
+                        resolve(true);
+                    }
+                });
             })
             return wcBridgeProcess;
         }
