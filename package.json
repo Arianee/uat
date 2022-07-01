@@ -20,7 +20,8 @@
   "files": [
     "common_steps",
     "features",
-    "script.js"
+    "script.js",
+    "docker-compose.yml"
   ],
   "author": "",
   "license": "ISC",
