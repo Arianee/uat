@@ -1,0 +1,8 @@
+{
+  "route": "**/example",
+  "response": {
+    "status": 200,
+    "contentType": "text/html",
+    "body": "<p class=\"mockedHttp\">successfully mocked response using default mock file for this route</p>"
+  }
+}

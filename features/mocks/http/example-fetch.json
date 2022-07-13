@@ -1,0 +1,7 @@
+{
+  "response": {
+    "status": 200,
+    "contentType": "text/html",
+    "body": "<p>not fetched yet</p><script>fetch('http://localhost:4200/fetch2').then((r) => { r.text().then((text) => { document.querySelector('body').innerHTML = text;}) })</script>"
+  }
+}
