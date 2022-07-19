@@ -97,6 +97,64 @@ Then _user wait for personal signature request
 Then _user wallet accepts last personal signature
 ```
 
+### Mocking HTTP(S) requests
+
+You can mock HTTP(S) requests by setting `httpMocksPath` in the configuration file under the `configuration` property. We recommend mocks to be placed at: `./features/mocks/http/`.
+
+There are 2 types of HTTP(S) mocks:
+- mock based on the request's route (default mock)
+- mock using a specified mock file
+
+#### Mocking based on the request's route
+Create a file `my-request-default.json` in your `httpMocksPath`, naming doesn't matter but we recommend that you give a meaningful name and that you suffix it with *-default*.
+
+
+Inside that file, put this json:
+
+```
+{
+  "route": "https://your-route/with/pathname",
+  "response": {
+    "status": 200,
+    "contentType": "text/html",
+    "body": "<p>hello world</p>"
+  }
+}
+```
+
+Any request made to `https://your-route/with/pathname` (navigation, fetch...) will automatically be mocked and return the content specified in `response`.
+Note that you can use wildcards `**` and `*` in the route:
+- `**` should be placed at the beginning of the route and will match any protocol + domain + tld (http(s)://(www.)any-domain.tld/)
+- `*` will match any legal character except `/`
+
+For instance, with `**/*/test`:
+- `https://hello.world/123/test` will match
+- `http://www.test.fr/hello/test` will match
+- `https://test.fr/test` will not match (expects /something/ before test)
+
+#### Mocking using a specified mock file
+You can mock a certain route with a specified mock file by using the step `Given _http mock for 'http://route/' is 'name-of-the-mock-file'`.
+- `http://route/` is the exact route you want to mock, you can also use the wildcards `**` and `*`
+- `name-of-the-mock-file` is the name of the mock file in `httpMocksPath` without the `.json` extension.
+
+The file content MUST NOT have a `route` property, example of a valid file content `my-request-custom.json`: 
+```
+{
+  "response": {
+    "status": 200,
+    "contentType": "text/html",
+    "body": "<p>this is a custom mock with no route property</p>"
+  }
+}
+```
+
+Any request made to `http://route/` (navigation, fetch...) will return the content specified in `name-of-the-mock-file`. This has priority over the default mock for that route if there is one.
+
+
+#### Reseting mock to default file
+You can stop using a custom mock file for a certain route by using the step `Given _http mock for 'http://route/' is reset to default value`.
+
+
 ### Use custom variable
 
 @arianee/uat allows you to use your own variable. We use [fakejs](https://github.com/marak/Faker.js/).
@@ -180,6 +238,7 @@ It will pause until you press any key.
     "browser": "chromium", // browser to test
     "screenshotOnError": true // take a screenshot on error,
     "walletConnectBridge": false // open a wallet connect bridge on port 5001
+    "httpMocksPath": "./features/mocks/http/" // path where http mocks json are
   }
 }
 ```

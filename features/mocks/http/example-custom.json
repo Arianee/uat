@@ -1,0 +1,7 @@
+{
+  "response": {
+    "status": 200,
+    "contentType": "text/html",
+    "body": "<p class=\"mockedHttpCustom\">successfully mocked response using custom mock file</p>"
+  }
+}
