@@ -1,6 +1,7 @@
 {
   "response": {
     "status": 200,
+    "headers": { "access-control-allow-origin": "*" },
     "contentType": "text/html",
     "body": "<p class=\"fetched\">fetched!<p>"
   }

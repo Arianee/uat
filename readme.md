@@ -116,6 +116,7 @@ Inside that file, put this json:
   "route": "https://your-route/with/pathname",
   "response": {
     "status": 200,
+    "headers": { "access-control-allow-origin": "*" },
     "contentType": "text/html",
     "body": "<p>hello world</p>"
   }
@@ -142,6 +143,7 @@ The file content MUST NOT have a `route` property, example of a valid file conte
 {
   "response": {
     "status": 200,
+    "headers": { "access-control-allow-origin": "*" },
     "contentType": "text/html",
     "body": "<p>this is a custom mock with no route property</p>"
   }
@@ -150,7 +152,17 @@ The file content MUST NOT have a `route` property, example of a valid file conte
 
 Any request made to `http://route/` (navigation, fetch...) will return the content specified in `name-of-the-mock-file`. This has priority over the default mock for that route if there is one.
 
-
+#### CORS
+It is recommended that you allow CORS in your mock response as your app/tests may not work correctly otherwise:
+```
+{
+  ...
+  "response": {
+    ...
+    "headers": { "access-control-allow-origin": "*" }
+  }
+}
+```
 #### Reseting mock to default file
 You can stop using a custom mock file for a certain route by using the step `Given _http mock for 'http://route/' is reset to default value`.
 
