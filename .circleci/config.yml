@@ -29,12 +29,17 @@ jobs:
       - run:
           name: Run Test(s)
           command: npm run test
+      - persist_to_workspace:
+          root: ./common_steps
+          paths:
+            - "*"
 
   deploy: 
     docker: 
       - image: cimg/node:16.14.2
     steps:
       - checkout
+      - node/install-packages
       - attach_workspace:
           at: ./common_steps
       - run: 
@@ -42,7 +47,7 @@ jobs:
           command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
       - run:
           name: Publish to NPM
-          command: npm publish
+          command: npm publish --ignore-scripts
 
   push-github:
     docker:
