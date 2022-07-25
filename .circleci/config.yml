@@ -60,6 +60,11 @@ jobs:
           fingerprints:
             - "a9:f1:db:7a:fa:cf:ed:6c:2f:4b:f4:80:08:ae:8a:06"
       - run:
+          name: Config Github account
+          command: |
+            git config user.name "Package Version Bot"
+            git config user.email "tech@arianee.org"
+      - run:
           name: Publish new version to Github
           command: npm run postpublish
 
