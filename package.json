@@ -5,7 +5,7 @@
   "main": "dist",
   "scripts": {
     "prepublishOnly": "npm run build && npm test",
-    "postpublish": "npm version minor && git push",
+    "postpublish": "npm version minor -m 'feat(version): update to version %s [ci skip]' && git push",
     "build": "tsc",
     "build:w": "tsc --watch",
     "test": "npm run test:unit && npm run test:e2e",
