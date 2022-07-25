@@ -11,12 +11,13 @@ jobs:
       - checkout
       - node/install-packages
       - run:
-          name: build
+          name: Build application (node)
           command: npm run build
       - persist_to_workspace:
           root: ./common_steps
           paths:
             - "*"
+
   test:
     machine:
       image: ubuntu-2004:202008-01
@@ -26,9 +27,41 @@ jobs:
       - attach_workspace:
           at: ./common_steps
       - run:
-          name: tests
+          name: Run Test(s)
           command: npm run test
+      - persist_to_workspace:
+          root: ./common_steps
+          paths:
+            - "*"
 
+  deploy: 
+    docker: 
+      - image: cimg/node:16.14.2
+    steps:
+      - checkout
+      - node/install-packages
+      - attach_workspace:
+          at: ./common_steps
+      - run: 
+          name: Auth With NPM
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
+      - run:
+          name: Publish to NPM
+          command: npm publish --ignore-scripts
+
+  push-github:
+    docker:
+      - image: cimg/node:16.14.2
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ./common_steps
+      - add_ssh_keys:
+          fingerprints:
+            - "a9:f1:db:7a:fa:cf:ed:6c:2f:4b:f4:80:08:ae:8a:06"
+      - run:
+          name: Publish new version to Github
+          command: npm run postpublish
 
 workflows:
   build-and-test:
@@ -37,3 +70,17 @@ workflows:
       - test:
           requires:
             - build
+      - deploy-approval:
+          type: approval
+          requires:
+            - test
+          filters:
+            branches:
+              only:
+                - master
+      - deploy:
+          requires:
+            - deploy-approval
+      - push-github:
+          requires:
+            - deploy
