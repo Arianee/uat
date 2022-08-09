@@ -2,6 +2,7 @@ version: 2.1
 
 orbs:
   node: circleci/node@5.0.2
+  gh: circleci/github-cli@2.1.0
 
 jobs:
   build:
@@ -34,7 +35,7 @@ jobs:
           paths:
             - "*"
 
-  deploy: 
+  deploy-npm: 
     docker: 
       - image: cimg/node:16.14.2
     steps:
@@ -48,6 +49,18 @@ jobs:
       - run:
           name: Publish to NPM
           command: npm publish --ignore-scripts
+
+  deploy-gh-release: 
+    docker: 
+      - image: cimg/node:16.14.2
+    steps:
+      - checkout
+      - gh/setup:
+          version: 2.14.3
+      - run:
+          name: Create Github Release
+          command: |
+            gh release create v$(grep '"version": "' package.json | cut -d '"' -f4) --generate-notes
 
   push-github:
     docker:
@@ -75,7 +88,7 @@ workflows:
       - test:
           requires:
             - build
-      - deploy-approval:
+      - deploy-npm-approval:
           type: approval
           requires:
             - test
@@ -83,9 +96,20 @@ workflows:
             branches:
               only:
                 - master
-      - deploy:
+      - deploy-release-approval:
+          type: approval
           requires:
-            - deploy-approval
+            - test
+          filters:
+            branches:
+              only:
+                - master
+      - deploy-gh-release:
+          requires:
+            - deploy-release-approval
+      - deploy-npm:
+          requires:
+            - deploy-npm-approval
       - push-github:
           requires:
-            - deploy
+            - deploy-npm
