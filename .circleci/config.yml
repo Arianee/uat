@@ -100,10 +100,10 @@ workflows:
           type: approval
           requires:
             - test
-          # filters:
-          #   branches:
-          #     only:
-          #       - master
+          filters:
+            branches:
+              only:
+                - master
       - deploy-gh-release:
           requires:
             - deploy-release-approval
