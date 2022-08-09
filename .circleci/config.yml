@@ -95,7 +95,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
       - deploy-release-approval:
           type: approval
           requires:
@@ -103,7 +103,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
       - deploy-gh-release:
           requires:
             - deploy-release-approval
