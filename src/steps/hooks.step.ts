@@ -16,6 +16,7 @@ import {sendSlackMessage} from "./helpers/sendSlack";
 import {execSync} from "child_process";
 import process from "process";
 const readFileSync = require('fs').readFileSync;
+const writeFileSync=require('fs').writeFileSync;
 
 let configurationFile;
 let hasBeenInErrorOnce = false;
@@ -107,10 +108,22 @@ Before(async function () {
     this.utils=utils(this.store)
     this.page = await this.browser
         .newPage();
+    this.logValues=[];
+
+    await this.page.on('console',async (msg) => {
+        this.logValues.push({
+            text:msg.text(),
+            type:msg.type(),
+            location:msg.location(),
+            timestamp:new Date().toTimeString()
+        });
+    });
 
 });
 
 After(async function (scenario) {
+
+
     if (scenario.result.status === Status.FAILED) {
         server.kill();
         hasBeenInErrorOnce = true;
@@ -119,8 +132,9 @@ After(async function (scenario) {
         }
 
         if (this.page && this.configuration.configuration.screenshotOnError) {
-
+            writeFileSync('full_brower_log.json',JSON.stringify(this.logValues,null,2))
             await this.page.screenshot({path: 'failed_step.png'});
+
             console.log('check screenshot failed_step.png');
             if (this.configuration.configuration.slack) {
 
