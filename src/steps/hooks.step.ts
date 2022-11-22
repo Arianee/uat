@@ -125,7 +125,7 @@ After(async function (scenario) {
 
 
     if (scenario.result.status === Status.FAILED) {
-        server.kill();
+
         hasBeenInErrorOnce = true;
         if (!this.configuration.configuration.screenshotOnError) {
             console.log('This step has failed. To make a screenshot set process.env.screenshotOnError=true');
