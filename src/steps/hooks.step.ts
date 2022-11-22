@@ -132,8 +132,8 @@ After(async function (scenario) {
         }
 
         if (this.page && this.configuration.configuration.screenshotOnError) {
-            writeFileSync('full_brower_log.json',JSON.stringify(this.logValues,null,2))
-            await this.page.screenshot({path: 'failed_step.png'});
+            writeFileSync('./uat-debug/full_brower_log.json',JSON.stringify(this.logValues,null,2))
+            await this.page.screenshot({path: './uat-debug/failed_step.png'});
 
             console.log('check screenshot failed_step.png');
             if (this.configuration.configuration.slack) {
