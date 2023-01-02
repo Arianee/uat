@@ -124,7 +124,7 @@ Before(async function () {
 After(async function (scenario) {
 
 
-    if (scenario.result.status === Status.FAILED) {
+    if ([Status.FAILED, Status.UNKNOWN, Status.UNDEFINED].includes(scenario.result.status)) {
 
         hasBeenInErrorOnce = true;
         if (!this.configuration.configuration.screenshotOnError) {
