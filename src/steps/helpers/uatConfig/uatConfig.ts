@@ -7,7 +7,8 @@ import {
     stringFromProcessEnv
 } from "../misc.helpers";
 import path from "path";
-
+import { server } from "../server";
+    
 const {execSync, spawn} = require('child_process');
 
 export interface UatConfig {
@@ -76,21 +77,9 @@ export function start(customConfig: UatConfig = {}) {
     const configuration = extractuatConfiguration(preparedConfig);
 
     const start = async () => {
-        if (configuration.serve) {
-            let serverProcess;
-            const port = configuration.serve.port || 4200;
-            await new Promise(resolve => {
-                const url = `http://localhost:${port}?`;
-                serverProcess = spawn('npx',
-                    ['http-server', configuration.serve.dir, "--port", port, '--proxy', url]);
-                serverProcess.stdout.on('data', resolve);
+        const serverProcess = server(configuration);
 
-                serverProcess.stdout.on('data', resolve);
-            });
-
-            return serverProcess
-        }
-
+        return serverProcess
     };
 
     const walletConnectBridgeStart = async ()=>{

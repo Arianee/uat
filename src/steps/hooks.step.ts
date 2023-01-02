@@ -80,10 +80,6 @@ BeforeAll(async function () {
 });
 
 AfterAll(async function () {
-    if (server) {
-        server.kill();
-    }
-
     if(walletConnectBridge){
         execSync('docker-compose stop')
         walletConnectBridge.kill();
