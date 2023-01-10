@@ -34,6 +34,7 @@
     "faker": "5.2.x",
     "form-data": "3.0.x",
     "gently-copy": "3.2.x",
+    "kill-port": "^2.0.1",
     "lite-server": "^2.6.1",
     "node-fetch": "^2.x.x",
     "onecolor": "3.1.x",

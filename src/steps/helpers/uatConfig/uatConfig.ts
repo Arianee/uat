@@ -84,8 +84,6 @@ export function start(customConfig: UatConfig = {}) {
                 serverProcess = spawn('npx',
                     ['http-server', configuration.serve.dir, "--port", port, '--proxy', url]);
                 serverProcess.stdout.on('data', resolve);
-
-                serverProcess.stdout.on('data', resolve);
             });
 
             return serverProcess
