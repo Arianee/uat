@@ -26,8 +26,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@cucumber/cucumber": "7.2.x",
-    "@cucumber/pretty-formatter": "1.0.0-alpha.0",
+    "@cucumber/cucumber": "7.3.x",
+    "@cucumber/pretty-formatter": "1.0.0",
     "@slack/web-api": "6.1.x",
     "@walletconnect/client": "^1.7.8",
     "ethers": "^5.6.9",
