@@ -12,6 +12,7 @@
     "slowMotion": 150,
     "browser": "chromium",
     "screenshotOnError": true,
+    "pathLogs": "./uat-debug",
     "walletConnectBridge": false,
     "httpMocksPath":"./features/mocks/http/"
   }
