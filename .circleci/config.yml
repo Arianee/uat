@@ -21,7 +21,7 @@ jobs:
 
   test:
     machine:
-      image: ubuntu-2004:202008-01
+      image: ubuntu-2204:2024.05.1
     steps:
       - checkout
       - node/install-packages
@@ -35,23 +35,23 @@ jobs:
           paths:
             - "*"
 
-  deploy-npm: 
-    docker: 
+  deploy-npm:
+    docker:
       - image: cimg/node:16.14.2
     steps:
       - checkout
       - node/install-packages
       - attach_workspace:
           at: ./common_steps
-      - run: 
+      - run:
           name: Auth With NPM
           command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
       - run:
           name: Publish to NPM
           command: npm publish --ignore-scripts
 
-  deploy-gh-release: 
-    docker: 
+  deploy-gh-release:
+    docker:
       - image: cimg/node:16.14.2
     steps:
       - checkout
