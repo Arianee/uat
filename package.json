@@ -1,6 +1,6 @@
 {
   "name": "@arianee/uat",
-  "version": "2.49.0",
+  "version": "2.51.0",
   "description": "",
   "main": "dist",
   "scripts": {
@@ -26,14 +26,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@cucumber/cucumber": "7.2.x",
-    "@cucumber/pretty-formatter": "1.0.0-alpha.0",
+    "@cucumber/cucumber": "7.3.x",
+    "@cucumber/pretty-formatter": "1.0.0",
     "@slack/web-api": "6.1.x",
     "@walletconnect/client": "^1.7.8",
     "ethers": "^5.6.9",
     "faker": "5.2.x",
     "form-data": "3.0.x",
     "gently-copy": "3.2.x",
+    "kill-port": "^2.0.1",
     "lite-server": "^2.6.1",
     "node-fetch": "^2.x.x",
     "onecolor": "3.1.x",
@@ -53,6 +54,6 @@
     "jest": "^25.1.0",
     "ts-jest": "^25.0.0",
     "ts-node": "^8.6.2",
-    "typescript": "^4.7.4"
+    "typescript": "^3.9.10"
   }
 }

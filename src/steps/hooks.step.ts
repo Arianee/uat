@@ -1,7 +1,7 @@
 import {
     After,
-    Before,
     AfterAll,
+    Before,
     BeforeAll,
     defineParameterType,
     setDefaultTimeout,
@@ -11,13 +11,14 @@ import {
 import {utils} from "./helpers/utils";
 import {askQuestionBeforePassingToNextStep} from "./debug.step";
 import {start} from "./helpers/uatConfig/uatConfig";
-import playwright, {Page, Browser} from 'playwright';
+import playwright, {Browser, Page} from 'playwright';
 import {sendSlackMessage} from "./helpers/sendSlack";
 import {execSync} from "child_process";
 import process from "process";
+
 const readFileSync = require('fs').readFileSync;
 const writeFileSync=require('fs').writeFileSync;
-
+const kill = require('kill-port')
 let configurationFile;
 let hasBeenInErrorOnce = false;
 const uatConfigJSON = process.env.uatConfig || './uat.config.json';
@@ -81,7 +82,8 @@ BeforeAll(async function () {
 
 AfterAll(async function () {
     if (server) {
-        server.kill();
+        // npx is launching http-server in a child process so we need to kill it "manually"
+        await kill(configuration.serve.port, 'tcp').catch()
     }
 
     if(walletConnectBridge){
@@ -132,8 +134,8 @@ After(async function (scenario) {
         }
 
         if (this.page && this.configuration.configuration.screenshotOnError) {
-            writeFileSync('./uat-debug/full_brower_log.json',JSON.stringify(this.logValues,null,2))
-            await this.page.screenshot({path: './uat-debug/failed_step.png'});
+            writeFileSync(`${this.configuration.configuration.pathLogs}/full_brower_log.json`,JSON.stringify(this.logValues,null,2))
+            await this.page.screenshot({path: `${this.configuration.configuration.pathLogs}/failed_step.png`});
 
             console.log('check screenshot failed_step.png');
             if (this.configuration.configuration.slack) {

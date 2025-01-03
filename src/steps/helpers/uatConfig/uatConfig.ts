@@ -21,6 +21,7 @@ export interface UatConfig {
         slowMotion?:number,
         debug?: boolean,
         screenshotOnError?: boolean,
+        pathLogs?: string,
         browser?:string ,
         slack?:{
             channel:string,
@@ -37,6 +38,7 @@ export const defaultUATConfig: UatConfig = {
         debug: booleanFromProcessEnv('headless', false),
         screenshotOnError: booleanFromProcessEnv('headless', false),
         slowMotion:numberFromProcessEnv('slowMotion',150),
+        pathLogs: stringFromProcessEnv('pathLogs', "./uat-debug"),
         //'chromium', 'firefox', 'webkit'
         browser:stringFromProcessEnv('browser','chromium')
     }
@@ -47,6 +49,7 @@ export const fromProcessEnv: UatConfig = {
         debug: booleanFromProcessEnv('headless', undefined),
         screenshotOnError: booleanFromProcessEnv('headless', undefined),
         slowMotion:numberFromProcessEnv('slowMotion',undefined),
+        pathLogs: stringFromProcessEnv('pathLogs', "./uat-debug"),
         //'chromium', 'firefox', 'webkit'
         browser:stringFromProcessEnv('browser',undefined)
     }
@@ -83,8 +86,6 @@ export function start(customConfig: UatConfig = {}) {
                 const url = `http://localhost:${port}?`;
                 serverProcess = spawn('npx',
                     ['http-server', configuration.serve.dir, "--port", port, '--proxy', url]);
-                serverProcess.stdout.on('data', resolve);
-
                 serverProcess.stdout.on('data', resolve);
             });
 

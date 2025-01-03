@@ -385,3 +385,22 @@ Feature: Dev can test a lot of thing
 
     And _store value from api call 'http 200' body property 'url' as '{{URL}}'
 ```
+
+
+### Troubleshooting
+If you want to test some changes from this UAT library directly into another project and you have the following error when you run the UAT tests:
+```
+TypeError [ERR_INVALID_ARG_TYPE]: The "from" argument must be of type string. Received type undefined
+```
+You need to copy/paste (or symlink) the whole @cucumber repository from the @arianee/uat project to your project.
+```
+My project repo
+    node_modules
+      @cucumber (this must be a symlink (or a copy) of the @cucumber folder from you local @arianee/uat project (*)
+      @arianee
+        uat (this is the symlink (or copy) to your local @arianee/uat project) (**)
+My local @arianee/uat project (*)
+    node_modules
+      @cucumber (**)
+```
+More details at https://github.com/cucumber/cucumber-js/issues/1326(https://github.com/cucumber/cucumber-js/issues/1326)
