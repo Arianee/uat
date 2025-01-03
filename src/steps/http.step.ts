@@ -1,16 +1,5 @@
 import { Given, Before } from '@cucumber/cucumber';
-
-function genericRouteToRegExp(route) {
-  let regExpStr = route
-    .replace('**', '{DOUBLE_WILDCARD}')
-    .replace(/\*/g, '[a-zA-Z0-9@:%._\\-\\+~#=]*')
-    .replace(
-      '{DOUBLE_WILDCARD}',
-      '[(http(s)?):\\/\\/(www.)?a-zA-Z0-9@:%._\\-\\+~#=]{2,256}\\.{0,1}[a-z]{0,6}\\/*'
-    );
-
-  return new RegExp('^' + regExpStr + '\\/*$');
-}
+import { genericRouteToRegExp } from './helpers/genericRouteToRegExp/genericRouteToRegExp';
 
 function getMockedRouteResponse(url) {
   for (let genericRoute in this.overridenHttpMocks) {
