@@ -200,7 +200,7 @@ You can store a value in the local storage
 
 Scenario: User can take a screenshot and name it
     Then _take screenshot with file name 'myDir/screenshot1.png'
-    Then _send screenshot 'myDir/screenshot1.png' to api 'https://httpbin.org/post' with custom header
+    Then _send screenshot 'myDir/screenshot1.png' to api 'https://httpbun.org/post' with custom header
           """
          {
          "Breaking-Bad":"<3",
@@ -345,7 +345,7 @@ Feature: Dev can test a lot of thing
 
   Scenario: User can take a screenshot and name it
     Then _take screenshot with file name 'gitIgnoreDirectory/screenshot1.png'
-    Then _send screenshot 'gitIgnoreDirectory/screenshot1.png' to api 'https://httpbin.org/post' with custom header
+    Then _send screenshot 'gitIgnoreDirectory/screenshot1.png' to api 'https://httpbun.org/post' with custom header
           """
          {
          "Breaking-Bad":"<3",
@@ -364,7 +364,7 @@ Feature: Dev can test a lot of thing
 
   Scenario: Dev can call POST api
     Given _api user can 'http 200' with api call:
-      | url              | https://httpbin.org/post |
+      | url              | https://httpbun.org/post |
       | x-api-key        | 123456                   |
       | method           | POST                     |
 
@@ -381,7 +381,7 @@ Feature: Dev can test a lot of thing
     Then _api result status of 'http 200' should be:
       | status           | 200                     |
     Then _api result body of 'http 200' should be:
-        | url           | https://httpbin.org/post |
+        | url           | https://httpbun.org/post |
 
     And _store value from api call 'http 200' body property 'url' as '{{URL}}'
 ```
