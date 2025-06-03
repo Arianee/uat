@@ -3,7 +3,7 @@ Feature: Dev can test a lot of thing
 
   Scenario: Dev can call GET api
     Given _api user can 'http 200' with api call:
-      | url              | https://httpbin.org/get |
+      | url              | https://httpbun.org/get |
       | x-api-key        | 123456                  |
       | method           | GET                     |
 
@@ -14,7 +14,7 @@ Feature: Dev can test a lot of thing
 
   Scenario: Dev can call GET api
     Given _api user can 'http 404' with api call:
-      | url              | https://httpbin.org/gt |
+      | url              | https://httpbun.org/gt |
       | x-api-key        | 123456                  |
       | method           | GET                     |
 
@@ -25,7 +25,7 @@ Feature: Dev can test a lot of thing
 
   Scenario: Dev can call POST api
     Given _api user can 'http 200' with api call:
-      | url              | https://httpbin.org/post |
+      | url              | https://httpbun.org/post |
       | x-api-key        | 123456                   |
       | method           | POST                     |
 
@@ -42,6 +42,6 @@ Feature: Dev can test a lot of thing
     Then _api result status of 'http 200' should be:
       | status           | 200                     |
     Then _api result body of 'http 200' should be:
-        | url           | https://httpbin.org/post |
+        | url           | https://httpbun.org/post |
 
     And _store value from api call 'http 200' body property 'url' as '{{URL}}'

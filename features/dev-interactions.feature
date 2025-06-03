@@ -112,7 +112,7 @@ Feature: Dev can test a lot of thing
 
   Scenario: User can take a screenshot and name it
     Then _take screenshot with file name 'gitIgnoreDirectory/screenshot1.png'
-    Then _send screenshot 'gitIgnoreDirectory/screenshot1.png' to api 'https://httpbin.org/post' with custom header
+    Then _send screenshot 'gitIgnoreDirectory/screenshot1.png' to api 'https://httpbun.org/post' with custom header
           """
          {
          "Breaking-Bad":"<3",
