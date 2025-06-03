@@ -9,7 +9,7 @@
     "build": "tsc",
     "build:w": "tsc --watch",
     "test": "npm run test:unit && npm run test:e2e",
-    "server": "lite-server -c lite-server.config.js",
+    "server": "http-server ./www --port 4200",
     "test:unit": "./node_modules/.bin/jest",
     "test:e2e": "node index.bin.js ./features/**.feature",
     "e2e:dev": "headless=false npm run test:e2e -- --tags @dev"
@@ -28,14 +28,13 @@
   "dependencies": {
     "@cucumber/cucumber": "7.3.x",
     "@cucumber/pretty-formatter": "1.0.0",
-    "@slack/web-api": "6.1.x",
+    "@slack/web-api": "^7.9.2",
     "@walletconnect/client": "^1.7.8",
     "ethers": "^5.6.9",
     "faker": "5.2.x",
     "form-data": "3.0.x",
     "gently-copy": "3.2.x",
     "kill-port": "^2.0.1",
-    "lite-server": "^2.6.1",
     "node-fetch": "^2.x.x",
     "onecolor": "3.1.x",
     "playwright": "1.17.2"
@@ -51,6 +50,7 @@
     "babel-jest": "^25.1.0",
     "babel-watch": "^7.0.0",
     "gitool": "^1.17.0",
+    "http-server": "^14.1.1",
     "jest": "^25.1.0",
     "ts-jest": "^25.0.0",
     "ts-node": "^8.6.2",
