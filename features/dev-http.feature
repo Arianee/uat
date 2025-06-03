@@ -37,3 +37,8 @@ Feature: Dev can intercept http requests
     Given _http mock for 'http://localhost:4200/fetch2' is 'example-fetch2'
     Given _user navigates to 'http://localhost:4200/fetch'
     Then _user sees '.fetched'
+
+  Scenario: Http call made by javascript fetch is intercepted with json response
+    Given _http mock for 'http://localhost:4200/fetch-json' is 'example-fetch-json'
+    Given _user navigates to 'http://localhost:4200/fetch-json'
+    Then _'<body' content should contain "John"
