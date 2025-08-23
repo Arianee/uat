@@ -1,0 +1,8 @@
+{
+  "response": {
+    "status": 200,
+    "headers": { "access-control-allow-origin": "*" },
+    "contentType": "text/html",
+    "body": "{ \"name\": \"John\", \"age\": 30 }"
+  }
+}
