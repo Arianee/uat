@@ -37,7 +37,7 @@
     "kill-port": "^2.0.1",
     "node-fetch": "^2.x.x",
     "onecolor": "3.1.x",
-    "playwright": "1.17.2"
+    "playwright": "1.55.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.7",
