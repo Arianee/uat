@@ -24,9 +24,14 @@ jobs:
       image: ubuntu-2204:2024.05.1
     steps:
       - checkout
+      - node/install:
+          node-version: '16.14.2'
       - node/install-packages
       - attach_workspace:
           at: ./common_steps
+      - run:
+          name: Install Playwright browsers
+          command: npx playwright install --with-deps chromium
       - run:
           name: Run Test(s)
           command: npm run test
