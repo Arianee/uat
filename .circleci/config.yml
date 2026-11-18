@@ -31,7 +31,8 @@ jobs:
           at: ./common_steps
       - run:
           name: Install Playwright browsers
-          command: npx playwright install --with-deps chromium
+          # non-interactive apt: avoids needrestart's "restart services?" prompt hanging the job
+          command: sudo env "PATH=$PATH" DEBIAN_FRONTEND=noninteractive NEEDRESTART_MODE=a npx playwright install-deps chromium && npx playwright install chromium
       - run:
           name: Run Test(s)
           command: npm run test
