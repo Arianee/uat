@@ -1,7 +1,7 @@
 {
   "name": "@arianee/uat",
   "version": "2.55.0",
-  "description": "",
+  "description": "End-to-end (UAT) testing with Gherkin + Playwright: ready-to-use Cucumber steps for Chromium, Firefox and WebKit",
   "main": "dist",
   "scripts": {
     "prepublishOnly": "npm run build && npm test",
@@ -10,7 +10,7 @@
     "build:w": "tsc --watch",
     "test": "npm run test:unit && npm run test:e2e",
     "server": "http-server ./www --port 4200",
-    "test:unit": "./node_modules/.bin/jest",
+    "test:unit": "jest",
     "test:e2e": "node index.bin.js ./features/**.feature",
     "e2e:dev": "headless=false npm run test:e2e -- --tags @dev"
   },
@@ -20,47 +20,36 @@
   "files": [
     "common_steps",
     "features",
-    "script.js",
-    "docker-compose.yml"
+    "script.js"
   ],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@cucumber/cucumber": "7.3.x",
-    "@cucumber/pretty-formatter": "1.0.0",
-    "@slack/web-api": "^7.9.2",
-    "@walletconnect/client": "^1.7.8",
-    "ethers": "^5.6.9",
-    "faker": "5.2.x",
-    "follow-redirects": "^1.16.0",
-    "form-data": "3.0.x",
-    "gently-copy": "3.2.x",
+    "@cucumber/cucumber": "~7.3.2",
+    "@cucumber/pretty-formatter": "1.0.1",
+    "@slack/web-api": "^7.19.0",
+    "faker": "~5.5.3",
+    "form-data": "^3.0.5",
+    "http-server": "^14.1.1",
     "kill-port": "^2.0.1",
     "lodash": "^4.18.1",
-    "node-fetch": "^2.x.x",
-    "onecolor": "3.1.x",
-    "playwright": "1.17.2"
+    "node-fetch": "^2.7.0",
+    "onecolor": "^3.1.0",
+    "playwright": "~1.55.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.7.7",
-    "@babel/core": "^7.7.7",
-    "@babel/node": "^7.7.7",
-    "@babel/plugin-transform-async-to-generator": "^7.7.4",
-    "@babel/preset-env": "^7.7.7",
-    "@types/jest": "^24.9.0",
-    "@types/node": "^13.1.8",
-    "babel-jest": "^25.1.0",
-    "babel-watch": "^7.0.0",
-    "gitool": "^1.17.0",
-    "http-server": "^14.1.1",
-    "jest": "^25.1.0",
-    "ts-jest": "^25.0.0",
-    "ts-node": "^8.6.2",
-    "typescript": "^3.9.10"
+    "@types/jest": "^30.0.0",
+    "@types/lodash": "^4.17.20",
+    "@types/node": "^18.19.0",
+    "@types/node-fetch": "^2.6.13",
+    "jest": "^30.5.2",
+    "ts-jest": "^29.4.15",
+    "typescript": "~5.9.3"
   },
   "overrides": {
-    "request": {
-      "form-data": "^2.5.6"
-    }
+    "uuid": "^11.1.1"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }

@@ -1,39 +1,30 @@
 import {Given} from "@cucumber/cucumber";
 import assert = require("assert");
 import color from 'onecolor';
+import {Page} from "playwright";
 
-const colorProperties = ['background-color', 'color'];
+const getComputedStyleProperty = async (page: Page, selectorName: string, propertyName: string): Promise<string> => {
+    await page.waitForSelector(selectorName, {state: 'visible'});
 
-colorProperties.map(propertyName => {
-    return Given(`_user sees ${propertyName} of {selector} as {interpolateValue}`, async function (selectorName, fontColor) {
-        await this.page.waitForSelector(selectorName, {
-            visible: true
-        });
+    return page.evaluate(({selectorName, propertyName}) => {
+        const element = document.querySelector(selectorName);
+        return getComputedStyle(element).getPropertyValue(propertyName);
+    }, {selectorName, propertyName});
+};
 
-        const computedStyle = await this.page.evaluate((data) => {
-            const {selectorName, propertyName} = data;
-            const element = document.querySelector(selectorName);
-            return getComputedStyle(element).getPropertyValue(propertyName);
-        }, {selectorName, propertyName});
+['background-color', 'color'].forEach(propertyName => {
+    Given(`_user sees ${propertyName} of {selector} as {interpolateValue}`, async function (selectorName, expectedColor) {
+        const computedStyle = await getComputedStyleProperty(this.page, selectorName, propertyName);
 
         const colorOfElement = color(computedStyle).hex();
-        const expectedColor = color(fontColor).hex();
+        const expectedHex = color(expectedColor).hex();
 
-        assert(colorOfElement === expectedColor);
+        assert(colorOfElement === expectedHex, `${propertyName} of ${selectorName} is ${colorOfElement} and should be ${expectedHex}`);
     });
 });
 
 Given(`_user sees font-family of {selector} as {interpolateValue}`, async function (selectorName, expectedFont) {
-    await this.page.waitForSelector(selectorName, {
-        visible: true
-    });
+    const computedStyle = await getComputedStyleProperty(this.page, selectorName, 'font-family');
 
-    const computedStyle = await this.page.evaluate((data) => {
-        const {selectorName, propertyName} = data;
-        const element = document.querySelector(selectorName);
-        return getComputedStyle(element).getPropertyValue(propertyName);
-    }, {selectorName, propertyName: 'font-family'});
-
-    console.log(computedStyle);
-    assert(computedStyle === expectedFont);
+    assert(computedStyle === expectedFont, `font-family of ${selectorName} is ${computedStyle} and should be ${expectedFont}`);
 });

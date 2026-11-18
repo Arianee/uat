@@ -1,5 +1,6 @@
-const {WebClient} = require('@slack/web-api');
-const {createReadStream} = require('fs');
+import {WebClient} from '@slack/web-api';
+import {createReadStream} from 'fs';
+import {basename} from 'path';
 
 export const sendSlackMessage = async (data: {
     message: string,
@@ -11,28 +12,20 @@ export const sendSlackMessage = async (data: {
 
     const web = new WebClient(token);
 
-
     await web.conversations.join({channel});
 
-    let attachments;
     if (imgPath) {
-        const result = await web.files.upload(
-            {
-                channels: channel,
-                file: createReadStream(imgPath),
-            });
-
-        attachments = [
-            {
-                text: 'screenshot of your error',
-                image_url: result.file.permalink
-            }
-        ];
+        // files.upload has been retired by Slack: filesUploadV2 posts the message and the screenshot at once.
+        return web.filesUploadV2({
+            channel_id: channel,
+            initial_comment: message,
+            file: createReadStream(imgPath),
+            filename: basename(imgPath)
+        });
     }
 
     return web.chat.postMessage({
         text: message,
-        channel,
-        attachments
+        channel
     });
 };
