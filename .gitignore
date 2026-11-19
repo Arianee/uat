@@ -117,3 +117,6 @@ screenshot.png
 /gitIgnoreDirectory/**/*.*
 !/gitIgnoreDirectory/**/*.gitkeep
 
+
+# uat debug output (screenshots & browser logs on failure)
+uat-debug

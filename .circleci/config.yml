@@ -7,7 +7,7 @@ orbs:
 jobs:
   build:
     docker:
-      - image: cimg/node:16.14.2
+      - image: cimg/node:20.19
     steps:
       - checkout
       - node/install-packages
@@ -25,13 +25,14 @@ jobs:
     steps:
       - checkout
       - node/install:
-          node-version: '16.14.2'
+          node-version: '20.19'
       - node/install-packages
       - attach_workspace:
           at: ./common_steps
       - run:
           name: Install Playwright browsers
-          command: npx playwright install --with-deps chromium
+          # non-interactive apt: avoids needrestart's "restart services?" prompt hanging the job
+          command: sudo env "PATH=$PATH" DEBIAN_FRONTEND=noninteractive NEEDRESTART_MODE=a npx playwright install-deps chromium && npx playwright install chromium
       - run:
           name: Run Test(s)
           command: npm run test
@@ -42,7 +43,7 @@ jobs:
 
   deploy-npm:
     docker:
-      - image: cimg/node:16.14.2
+      - image: cimg/node:20.19
     steps:
       - checkout
       - node/install-packages
@@ -57,7 +58,7 @@ jobs:
 
   deploy-gh-release:
     docker:
-      - image: cimg/node:16.14.2
+      - image: cimg/node:20.19
     steps:
       - checkout
       - gh/setup:
@@ -69,7 +70,7 @@ jobs:
 
   push-github:
     docker:
-      - image: cimg/node:16.14.2
+      - image: cimg/node:20.19
     steps:
       - checkout
       - attach_workspace:

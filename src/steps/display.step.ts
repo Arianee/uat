@@ -1,81 +1,46 @@
 import {Given} from "@cucumber/cucumber";
 import assert = require("assert");
+import {Page} from "playwright";
+import {getInnerHTML} from "./helpers/dom.helpers";
 
-Given('_user sees {selector}', async function (selectorName) {
-    await this.page.waitForSelector(selectorName, {
-        visible: true,
-        strict: true
-    });
-});
-
-Given('_user sees {int} {selector}', async function (elementCount,selectorName) {
-    await this.page.waitForSelector(selectorName, {
-        visible: true
-    });
-
-    const elements = await this.page.$$(selectorName);
-    assert(elementCount===elements.length,`element count of ${selectorName} is ${elements.length} and should be ${elementCount}`);
-});
-
-Given('_user does not see {selector} after few seconds', async function (selectorName) {
-    const selector = this.utils.selectorFactory(selectorName);
+/**
+ * Gives the element a chance to appear, then waits for it to be hidden.
+ */
+const expectNotVisible = async (page: Page, selector: string, hiddenTimeout: number, appearTimeout = 2000) => {
     try {
-        await this.page.waitForSelector(selector, {
-            state: 'visible',
-            strict: true,
-            timeout: 2000
-        });
-    } catch (e) {
+        await page.waitForSelector(selector, {state: 'visible', strict: true, timeout: appearTimeout});
+    } catch {
+        // element never showed up: this is fine
     }
 
-    await this.page.waitForSelector(selector, {
-        state: 'hidden',
-        timeout: 2000,
-        strict: true
-    });
+    await page.waitForSelector(selector, {state: 'hidden', strict: true, timeout: hiddenTimeout});
+};
+
+Given('_user sees {selector}', async function (selector) {
+    await this.page.waitForSelector(selector, {state: 'visible', strict: true});
 });
 
-Given('_user does not see {selector}', async function (selectorName) {
-    const selector = this.utils.selectorFactory(selectorName);
-    try {
-        await this.page.waitForSelector(selector, {
-            state: 'visible',
-            strict: true,
-            timeout: 2000
-        });
-    } catch (e) {
-    }
+Given('_user sees {int} {selector}', async function (elementCount, selector) {
+    await this.page.waitForSelector(selector, {state: 'visible'});
 
-    await this.page.waitForSelector(selector, {
-        state: 'hidden',
-        timeout: 2000,
-        strict: true
-    });
+    const elements = await this.page.$$(selector);
+    assert(elementCount === elements.length, `element count of ${selector} is ${elements.length} and should be ${elementCount}`);
 });
 
-Given('_user does not see {selector} after {int} seconds', async function (selectorName, timeout) {
-    try {
-        await this.page.waitForSelector(this.utils.selectorFactory(selectorName), {
-            state: 'visible',
-            timeout: 3000,
-            strict: true
-        });
-    } catch (e) {
-    }
+Given('_user does not see {selector} after few seconds', async function (selector) {
+    await expectNotVisible(this.page, selector, 2000);
+});
 
-    await this.page.waitForSelector(this.utils.selectorFactory(selectorName), {
-        state: 'hidden',
-        timeout: timeout * 1000,
-        strict: true
-    });
+Given('_user does not see {selector}', async function (selector) {
+    await expectNotVisible(this.page, selector, 2000);
+});
+
+Given('_user does not see {selector} after {int} seconds', async function (selector, timeout) {
+    await expectNotVisible(this.page, selector, timeout * 1000, 3000);
 });
 
 Given('_{selector} content is {string}', async function (selector, expectedValue) {
-    const concatenatedSelector = this.utils.selectorFactory(selector);
-    const content = await this.page.evaluate((aselector) => {
-        const element = document.querySelector(aselector);
-        return element.innerHTML;
-    }, concatenatedSelector);
+    const content = await getInnerHTML(this.page, selector);
 
-    assert(content.trim() === expectedValue.trim());
+    assert(content.trim() === expectedValue.trim(), `content of ${selector} is "${content.trim()}" and should be "${expectedValue.trim()}"`);
 });

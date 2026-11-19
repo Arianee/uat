@@ -13,7 +13,6 @@
     "browser": "chromium",
     "screenshotOnError": true,
     "pathLogs": "./uat-debug",
-    "walletConnectBridge": false,
     "httpMocksPath":"./features/mocks/http/"
   }
 }

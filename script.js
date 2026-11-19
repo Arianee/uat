@@ -1,11 +1,11 @@
-var gentlyCopy = require('gently-copy');
+// Copies the compiled common steps into the project that installed @arianee/uat.
+const fs = require('fs');
+const path = require('path');
 
-var filesToCopy = ['common_steps'];
+const source = path.join(__dirname, 'common_steps');
+// User's local directory (set by npm when running a lifecycle script)
+const userPath = process.env.INIT_CWD || process.cwd();
 
-// User's local directory
-var userPath = process.env.INIT_CWD;
+fs.cpSync(source, path.join(userPath, 'common_steps'), { recursive: true, force: true });
 
-// Moving files to user's local directory
-gentlyCopy(filesToCopy, userPath, {overwrite: true});
-
-console.log("You should add common_steps directory to your .gitignore");
+console.log('You should add common_steps directory to your .gitignore');
