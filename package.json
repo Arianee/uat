@@ -1,6 +1,6 @@
 {
   "name": "@arianee/uat",
-  "version": "2.55.0",
+  "version": "2.56.0",
   "description": "End-to-end (UAT) testing with Gherkin + Playwright: ready-to-use Cucumber steps for Chromium, Firefox and WebKit",
   "main": "dist",
   "scripts": {
